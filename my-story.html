@@ -9,17 +9,17 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            scroll-behavior: smooth; /* Agar scroll halus */
+            scroll-behavior: smooth;
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
             display: flex;
             min-height: 100vh;
         }
 
-        /* --- SIDEBAR KIRI (Menu) --- */
+        /* --- SIDEBAR KIRI (Menu Utama) --- */
         .sidebar {
             width: 300px;
             background-color: #ffffff;
@@ -27,14 +27,14 @@
             position: fixed;
             height: 100vh;
             overflow-y: auto;
-            box-shadow: 4px 0 20px rgba(0,0,0,0.1);
+            box-shadow: 4px 0 20px rgba(0,0,0,0.05);
             z-index: 10;
         }
 
         /* --- SIDEBAR KANAN (Daftar Isi) --- */
         .right-sidebar {
             width: 400px;
-            background-color: rgba(255, 255, 255, 0.6); /* Transparan saat normal */
+            background-color: rgba(255, 255, 255, 0.5);
             padding: 30px 20px;
             position: fixed;
             right: 0;
@@ -42,15 +42,14 @@
             height: 100vh;
             overflow-y: auto;
             border-left: 1px solid rgba(0,0,0,0.05);
-            transition: all 0.3s ease; /* Transisi halus */
-            backdrop-filter: blur(5px); /* Efek blur */
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
             z-index: 10;
             transform: translateX(10px);
         }
 
-        /* Efek Hover Sidebar Kanan */
         .right-sidebar:hover {
-            background-color: #ffffff; /* Solid saat hover */
+            background-color: #ffffff;
             box-shadow: -4px 0 20px rgba(0,0,0,0.1);
             transform: translateX(0);
             opacity: 1;
@@ -66,11 +65,11 @@
 
         .toc-item {
             display: block;
-            padding: 10px 15px;
+            padding: 8px 15px;
             margin-bottom: 8px;
             color: #666;
             text-decoration: none;
-            border-radius: 8px;
+            border-radius: 6px;
             font-size: 14px;
             transition: all 0.2s ease;
             border-left: 3px solid transparent;
@@ -83,57 +82,44 @@
             transform: translateX(-5px);
         }
 
-        /* --- Profil Kiri --- */
+        /* --- Profil --- */
         .profile {
             display: flex;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             gap: 15px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
         }
 
-        .profile-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: rgb(0, 0, 0);
-            font-size: 24px;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        .profile-info h2 {
-            font-size: 20px;
-            color: rgb(0, 0, 0);
-            margin-bottom: 3px;
-            font-weight: 600;
-        }
         .profile-info nama {
-            font-size: 20px;
+            font-size: 18px;
             color: rgb(241, 149, 0);
-            margin-bottom: 3px;
             font-weight: 600;
+            display: block;
         }
+
         .profile-info p {
-            font-size: 16px;
-            color: #000000;
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
         }
 
         /* --- Menu Items --- */
         .menu-item {
-            padding: 15px 20px;
-            margin-bottom: 10px;
+            padding: 12px 20px;
+            margin-bottom: 8px;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
             gap: 12px;
-            color: #000000;
+            color: #555;
             text-decoration: none;
             position: relative;
             overflow: hidden;
+            border-radius: 8px;
+            font-size: 15px;
         }
 
         .menu-item::before {
@@ -142,14 +128,16 @@
             left: 0;
             top: 0;
             height: 100%;
-            width: 3px;
-            background: linear-gradient(135deg, #523701 0%, #6b4400 100%);
+            width: 4px;
+            background: linear-gradient(135deg, #feac28 0%, #ff8800 100%);
             transform: scaleY(0);
             transition: transform 0.3s ease;
+            border-radius: 4px;
         }
 
         .menu-item:hover {
-            background-color: rgba(255,255,255,0.1);
+            background-color: rgba(254, 172, 40, 0.1);
+            color: #d38b00;
             transform: translateX(5px);
         }
 
@@ -158,13 +146,9 @@
         }
 
         .menu-item.active {
-            background-color: rgb(241, 149, 0);
+            background: linear-gradient(135deg, #feac28 0%, #ff8800 100%);
             color: white;
-            box-shadow: 0 4px 15px rgba(126, 89, 0, 0.3);
-        }
-
-        .menu-item.active::before {
-            transform: scaleY(1);
+            box-shadow: 0 4px 15px rgba(254, 172, 40, 0.3);
         }
 
         .menu-item svg {
@@ -175,14 +159,10 @@
         /* --- MAIN CONTENT --- */
         .main-content {
             margin-left: 300px;
-            margin-right: 250px; /* Ruang untuk sidebar kanan */
+            margin-right: 250px;
             flex: 1;
-            padding: 50px 80px;
-            max-width: 1400px;
-        }
-
-        .main-content2 {
-            margin: 20px 0;
+            padding: 50px 60px;
+            max-width: 1200px;
         }
 
         .header {
@@ -191,82 +171,74 @@
         }
 
         .header h1 {
-            font-size: 60px;
+            font-size: 50px;
             background: linear-gradient(135deg, #feac28 0%, #ffa719 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 15px;
-            font-weight: 700;
+            margin-bottom: 10px;
+            font-weight: 800;
             animation: fadeInUp 0.8s ease;
         }
 
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .header p {
+        /* Content Styling */
+        .content-body {
+            background: white;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+        }
+
+        .section-title {
             font-size: 24px;
-            color: #666;
-            animation: fadeInUp 1s ease;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 700;
+            border-left: 4px solid #feac28;
+            padding-left: 15px;
+            margin-top: 30px;
+            scroll-margin-top: 30px;
         }
-
-        .about-image {
-            width: 100%;
-            max-width: 1200px;
-            height: 400px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 6rem;
-            color: white;
-            margin: 0 auto 40px auto;
-            background-image: url('bg1.png');
-            box-shadow: 0 15px 40px rgba(234, 181, 102, 0.15);
-            background-size: cover;
-            background-position: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .about-image:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 60px rgba(234, 183, 102, 0.4);
+        
+        .section-title:first-of-type {
+            margin-top: 0;
         }
 
         .description {
             text-align: justify;
             font-size: 17px;
             line-height: 1.9;
-            color: #333;
-            margin-bottom: 30px;
-            scroll-margin-top: 100px; /* Agar saat diklik tidak tertutup header */
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        .highlight-quote {
+            background: #fff9f0;
+            border-left: 5px solid #feac28;
+            padding: 25px;
+            margin-top: 40px;
+            border-radius: 8px;
+            font-style: italic;
+            color: #555;
+            font-size: 17px;
         }
 
         /* Responsiveness */
         @media (max-width: 1200px) {
-            .right-sidebar {
-                display: none;
-            }
-            .main-content {
-                margin-right: 0;
-                padding-right: 30px;
-            }
+            .right-sidebar { display: none; }
+            .main-content { margin-right: 0; padding-right: 40px; }
         }
 
         @media (max-width: 768px) {
-            .sidebar {
-                width: 100%;
-                position: relative;
-                height: auto;
-            }
-            .main-content {
-                margin-left: 0;
-                padding: 30px 20px;
-            }
-            .header h1 {
-                font-size: 42px;
-            }
+            .sidebar { width: 100%; position: relative; height: auto; padding: 20px; border-bottom: 1px solid #eee; }
+            .main-content { margin-left: 0; padding: 30px 20px; }
+            .header h1 { font-size: 36px; }
+            .content-body { padding: 25px; }
         }
     </style>
 </head>
@@ -281,54 +253,35 @@
 
         <nav>
             <a href="index.html" class="menu-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                </svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                 Selamat Datang
             </a>
-
-            <a href="all-about-me.html" class="menu-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="12" cy="7" r="4"></circle>
-                </svg>
-                UTS-1 All About Me
+            
+            <a href="all-about-me.html" class="menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>UTS-1 All About Me</a>
+            <a href="my-song-for-you.html" class="menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>UTS-2 My Songs for You</a>
+            <a href="my-story.html" class="menu-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>UTS-3 My Stories for You</a>
+            <a href="my-shape.html" class="menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>UTS-4 My SHAPE</a>
+            <a href="review.html" class="menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>UTS-5 My Personal Reviews</a>
+            
+            <a href="myConcepts.html" class="menu-item">
+                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16.1A5 5 0 0 1 5.9 20M2 12.05A9 9 0 0 1 9.95 20M2 8A13 13 0 0 1 13.95 20M2 4A17 17 0 0 1 17.95 20M2 20h.01"></path></svg>
+                UAS-1 My Concepts
             </a>
-
-            <a href="my-song-for-you.html" class="menu-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M9 18V5l12-2v13"></path>
-                    <circle cx="6" cy="18" r="3"></circle>
-                    <circle cx="18" cy="16" r="3"></circle>
-                </svg>
-                UTS-2 My Songs for You
+            <a href="myOpinions.html" class="menu-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+               UAS-2 My Opinions
+           </a>
+           <a href="myInovations.html" class="menu-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                UAS-3 My Inovations
             </a>
-
-            <a href="my-story.html" class="menu-item active">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-                </svg>
-                UTS-3 My Stories for You
+            <a href="myKnowledge.html" class="menu-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                UAS-4 My Knowledge
             </a>
-
-            <a href="my-shape.html" class="menu-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                </svg>
-                UTS-4 My SHAPE
-            </a>
-
-            <a href="review.html" class="menu-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                    <polyline points="14 2 14 8 20 8"></polyline>
-                    <line x1="16" y1="13" x2="8" y2="13"></line>
-                    <line x1="16" y1="17" x2="8" y2="17"></line>
-                    <polyline points="10 9 9 9 8 9"></polyline>
-                </svg>
-                UTS-5 My Personal Reviews
+            <a href="myProfesional.html" class="menu-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                UAS-5 My Profesional
             </a>
         </nav>
     </aside>
@@ -338,56 +291,57 @@
             <h1 style="font-family: Oxygen">My Story For You</h1>
         </header>
         
-        <div class="description"></div>
-
-        <main class="main-content2">
-
+        <div class="content-body">
             <p class="description" id="intro">
                 Aku Krisna Kusuma, mahasiswa Sistem dan Teknologi Informasi di Institut Teknologi Bandung. Sudah 3 semester aku lalui dengan suka cita, tentu masih panjang perjalanan akademikku di dunia yang begitu luas dan menantang — dunia di mana teknologi, logika, dan manusia saling bertemu <i>~INFORMATIKA~</i>.
             </p>
 
-            <p class="description" id="masa-kecil">
+            <h2 class="section-title" id="masa-kecil">Awal Mula Ketertarikan</h2>
+            <p class="description">
                 Alasanku mengambil Sistem dan Teknologi Informasi karena rasa suka ku sedari TK dalam dunia komputer. Mulai dari suka main PS(PlayStation, saat itu PlayStation 2), berlanjut memberikan <i>mod</i>(semacam modifikasi game) dengan berbekal tutorial youtube, hingga aku belajar ngecheat di salah satu game shooter, <i>“Crisis Action”</i>. Kegemaranku berlanjut sampai di bangku SMP. Aku memulai untuk belajar ngoding dengan berbekal tutorial youtube “Kelas Terbuka”. Saat itu, bahasa yang aku pelajari adalah C#(karena ingin membuat game) dan javascript(karena ingin membuat aplikasi). Aplikasi pertama ku pun selesai, berjudul “Kalkulator Sederhana”. Kalkulator tersebut dibuat menggunakan GUI sederhana tanpa hiasan apapun. Setelahnya… dikarenakan tugas yang menumpuk dari sekolah, kegiatan ngoding pun harus berhenti, dan selayaknya bahasa yang tidak pernah diasah, lama kelamaan skill ngodingku pun hilang entah kemana. Hingga aku duduk di masa SMA
             </p>
 
-            <p class="description" id="sma">
+            <h2 class="section-title" id="sma">Masa SMA & Pandemi</h2>
+            <p class="description">
                 Semasa SMA(terlebih kelas 10 dan 11) terdapat pandemi Covid-19 yang mengharuskan sekolah menjadi online dan lockdown dimana mana. saat itu kegiatan sehari hariku diisi dengan bermain game di depan komputer tanpa memikirkan kelanjutan studiku mau kemana. Hal tersebut membuatku bimbang dalam pemilihan jurusan saat kelas 12, Jurusan apa yang harus ku ambil? apa keahlianku? pertanyaan itu terus muncul di dalam otakku terus menerus hingga aku lupa keahlianku dulu, ngoding. Sampailah di pemilihan jurusan saat SNBT, dan yap, jurusan adalah kedokteran, dengan alasan “aku ingin menolong orang”, sangat mulia bukan?
             </p>
 
-            <p class="description" id="fk">
+            <h2 class="section-title" id="fk">Perjalanan di FK</h2>
+            <p class="description">
                 Aku pun lolos di seleksi SNBT dan keterima di Kedokteran FK UNUD(saat ini namanya naik lagi karena ada mahasiswa kedokteran nirnurani). Dikala orang lain senang bukan main mendapatkan jurusan kedokteran yang kelak mereka akan menjadi dokter, AKU, dengan pengumuman ini malah bingung, “lahh dapet? padahal pengen nyoba mandiri itb ngambil STEIK”(saat menunggu pengumuman aku sempat berpikir untuk mengikuti seleksi mandiri jika tidak keterima). Keinginan tersebut aku patahkan, dan move on untuk mengikuti rangkaian PKKMB UNUD.
             </p>
-
             <p class="description">
                 Hari demi hari di FK Unud pun berjalan. Awalnya, aku berusaha untuk menyesuaikan diri — belajar anatomi, histologi, fisiologi, dan berbagai istilah medis yang bahkan sebelumnya belum pernah kudengar. Semua terasa baru, asing, dan jujur saja… berat. Tapi di sisi lain, aku mencoba untuk tetap menghargai prosesnya. Aku berpikir, “Mungkin aku akan jatuh cinta pada bidang ini seiring berjalannya waktu.” Sayangnya, rasa itu tak pernah benar-benar muncul.
             </p>
 
-            <p class="description" id="titik-balik">
+            <h2 class="section-title" id="titik-balik">Titik Balik</h2>
+            <p class="description">
                 Tidak jarang aku berpikir “kayanya ngoding lagi seru deh, tapi gaada kaitannya sama jurusan ku, buang buang waktu”. Aku mulai sadar — mungkin bukan dunia medis yang membuatku bersemangat, melainkan dunia teknologi.
             </p>
-
             <p class="description">
                 Waktu berjalan hingga aku menginjak semester 2. Aku mulai merasa seperti sedang menjalani hidup orang lain. Teman-teman terlihat antusias mempelajari kasus-kasus medis, sementara aku lebih sering merasa terjebak dalam rutinitas. Sampai akhirnya, aku melihat pengumuman pendaftaran SNBT tahun 2024.
             </p>
 
-            <p class="description" id="perjuangan">
-                Dari situlah aku mulai semangat baru untuk mencoba mengikuti seleksi SNBT namun masih dengan kesibukan perkuliahan yang sempat aku kesampingkan.  Aku mulai belajar lagi sedikit demi sedikit, membuka kembali tutorial lama dan belajar mengenai materi SNBT.
+            <h2 class="section-title" id="perjuangan">Perjuangan SNBT & ITB</h2>
+            <p class="description">
+                Dari situlah aku mulai semangat baru untuk mencoba mengikuti seleksi SNBT namun masih dengan kesibukan perkuliahan yang sempat aku kesampingkan. Aku mulai belajar lagi sedikit demi sedikit, membuka kembali tutorial lama dan belajar mengenai materi SNBT.
             </p>
-
             <p class="description">
                 Prosesnya panjang, penuh keraguan, tapi juga penuh tekad. Aku tahu, kalau pun sulit, setidaknya aku berjuang di jalur yang benar-benar aku cintai. Kini aku di sini, di STI ITB. Perjalanannya tentu tidak mudah — tugas, tekanan, dan persaingan kadang membuatku lelah. Tapi bedanya, kali ini aku menikmati setiap prosesnya. Karena aku tahu, aku berada di tempat yang seharusnya.
             </p>
 
-            <p class="description" id="penutup">
+            <h2 class="section-title" id="penutup">Penutup</h2>
+            <p class="description">
                 Saya, Krisna, dan masih berproses. Saya bukan versi terbaik dari diri saya, tapi saya sedang menuju ke sana dengan langkah yang sadar dan niat yang jujur. Saya ingin terus belajar, berbuat baik, dan menjadi seseorang yang bisa membawa manfaat bagi orang lain — sekecil apa pun bentuknya.
             </p>
 
-            <p class="description">
-                <i>“kalau kalian mencoba untuk mengubur mimpi kalian dalam dalam karena kalian takut untuk mencoba, mimpi kalian tidak benar benar mati, melainkan mimpi tersebut hanya tertidur dan akan  terbangun  dikemudian hari.”</i> -– Pandji Pragiwaksono  
-                <br><br>mungkin itu yang ku rasakan selama ini.
-            </p>
-
-        </main>
+            <div class="highlight-quote">
+                “Kalau kalian mencoba untuk mengubur mimpi kalian dalam dalam karena kalian takut untuk mencoba, mimpi kalian tidak benar benar mati, melainkan mimpi tersebut hanya tertidur dan akan terbangun dikemudian hari.”
+                <br><strong>— Pandji Pragiwaksono</strong>
+                <br><br>
+                Mungkin itu yang ku rasakan selama ini.
+            </div>
+        </div>
     </main>
 
     <aside class="right-sidebar">
