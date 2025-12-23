@@ -226,7 +226,7 @@
 
         /* --- Table Styling --- */
         .table-container {
-            overflow-x: auto; /* Agar responsif di HP */
+            overflow-x: auto;
         }
 
         table {
@@ -301,6 +301,31 @@
             color: #feac28;
             text-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
+        .peer-link-container {
+             margin-top: 30px;
+             text-align: center;
+        }
+        
+        .peer-link {
+            display: block;
+            background: white;
+            color: #feac28;
+            text-decoration: none;
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid #feac28;
+            font-weight: bold;
+            font-size: 18px;
+            transition: all 0.3s;
+            scroll-margin-top: 30px;
+        }
+        
+        .peer-link:hover {
+            background: #feac28;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(254, 172, 40, 0.3);
+        }
 
         /* Responsiveness */
         @media (max-width: 1200px) {
@@ -337,6 +362,7 @@
             <a href="my-song-for-you.html" class="menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>UTS-2 My Songs for You</a>
             <a href="my-story.html" class="menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>UTS-3 My Stories for You</a>
             <a href="my-shape.html" class="menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>UTS-4 My SHAPE</a>
+            
             <a href="review.html" class="menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>UTS-5 My Personal Reviews</a>
             
             <a href="myConcepts.html" class="menu-item">
@@ -355,7 +381,6 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
                 UAS-4 My Knowledge
             </a>
-            
             <a href="myProfesional.html" class="menu-item active">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
                 UAS-5 My Profesional
@@ -428,24 +453,24 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="criteria-cell">Clarity</td>
+                            <td class="criteria-cell">Compelling</td>
                             <td class="score-cell">5</td>
-                            <td class="justification-cell">Opini tentang perubahan paradigma pendidikan disajikan tanpa ambiguitas. Istilah baru seperti Impact Marketplace dan Eco-Credits didefinisikan dengan jelas operasionalnya.</td>
+                            <td class="justification-cell">Opini tentang pergeseran dari "mengetahui" ke "melakukan" sangat menggugah. Analogi "Pabrik Ijazah" vs "Inkubator Dampak" sangat kuat dan menarik perhatian pembaca terhadap urgensi perubahan dalam pendidikan teknik lingkungan di era AI.</td>
                         </tr>
                         <tr>
-                            <td class="criteria-cell">Logic</td>
+                            <td class="criteria-cell">Informatif</td>
                             <td class="score-cell">5</td>
-                            <td class="justification-cell">Argumen dibangun secara logis: AI membuat hafalan usang -> Krisis lingkungan butuh solusi nyata -> Maka, ruang kelas harus jadi simulasi kerja (Teater Kerja). Alur pikir ini runtut dan masuk akal.</td>
+                            <td class="justification-cell">Memberikan informasi yang kaya tentang model pembelajaran baru, termasuk konsep "Portofolio Integritas Ekologis", "Mata Uang Dampak", dan "Teater Kerja". Data tentang emisi CO2 dan kesenjangan keterampilan hijau memperkuat basis informasi.</td>
                         </tr>
                         <tr>
-                            <td class="criteria-cell">Validity</td>
+                            <td class="criteria-cell">Persuasif</td>
                             <td class="score-cell">5</td>
-                            <td class="justification-cell">Sangat valid dalam merespons tantangan ganda saat ini: keberadaan Generative AI di dunia pendidikan dan krisis iklim. Solusi yang ditawarkan relevan dengan kebutuhan industri masa depan.</td>
+                            <td class="justification-cell">Argumen yang dibangun sangat meyakinkan. Menghubungkan ancaman eksistensial (krisis iklim) dengan solusi praktis (pembelajaran berbasis proyek nyata) menciptakan dorongan kuat untuk bertindak. Pernyataan penutup yang menantang ("...bukan diukur dari IPK, tapi dari berapa ton karbon yang berhasil mereka serap") sangat persuasif.</td>
                         </tr>
                         <tr>
-                            <td class="criteria-cell">Usefulness</td>
+                            <td class="criteria-cell">Engaging</td>
                             <td class="score-cell">5</td>
-                            <td class="justification-cell">Sangat aplikatif. Ide "Portofolio Integritas Ekologis" dan metode penilaian berbasis "Mata Uang Dampak" dapat langsung diadopsi oleh institusi pendidikan teknik.</td>
+                            <td class="justification-cell">Gaya penulisan yang provokatif namun konstruktif membuat pembaca terlibat. Penggunaan pertanyaan retoris dan skenario masa depan (insinyur yang hanya bisa 'prompting' vs insinyur yang bisa 'membangun') menjaga minat baca dari awal hingga akhir.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -470,24 +495,24 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="criteria-cell">Clarity</td>
+                            <td class="criteria-cell">Guna</td>
                             <td class="score-cell">5</td>
-                            <td class="justification-cell">Meskipun memuat terminologi teknis yang padat (PUDAL, CORE Engine, Entropi), penggunaan analogi "Stasiun", "Kendaraan", dan "Rute Jalan" membuat arsitektur sistem yang kompleks menjadi sangat mudah dibayangkan (visualizable).</td>
+                            <td class="justification-cell">Inovasi ini sangat berguna karena menawarkan kerangka kerja yang komprehensif untuk menangani masalah polusi yang kompleks. Arsitektur Pollution Solving Agent (PSA) memberikan panduan langkah demi langkah yang praktis bagi pengembang solusi lingkungan.</td>
                         </tr>
                         <tr>
-                            <td class="criteria-cell">Logic</td>
+                            <td class="criteria-cell">Kebaruan</td>
                             <td class="score-cell">5</td>
-                            <td class="justification-cell">Sistem dirancang dengan logika rekayasa sistem yang kuat (Systems Engineering). Siklus umpan balik (Input -> PUDAL -> Output -> Evaluasi) menunjukkan koherensi struktur yang tinggi.</td>
+                            <td class="justification-cell">Pendekatan yang menggabungkan konsep termodinamika (entropi vs negentropi) dengan rekayasa perangkat lunak (agen cerdas) dan filosofi (TISE 2.0) adalah sangat baru dan unik. Pengenalan konsep "Teater Pemulihan" sebagai metafora operasional juga orisinal.</td>
                         </tr>
                         <tr>
-                            <td class="criteria-cell">Validity</td>
+                            <td class="criteria-cell">Desain</td>
                             <td class="score-cell">5</td>
-                            <td class="justification-cell">Inovasi ini didasarkan pada prinsip termodinamika (entropi vs negentropi) dan siklus manajemen masalah standar industri, menjadikannya model teoretis yang valid.</td>
+                            <td class="justification-cell">Desain sistem dirancang dengan sangat baik, mengikuti prinsip-prinsip rekayasa sistem yang kuat. Siklus umpan balik yang jelas (Input -> PUDAL -> CORE -> Output -> Evaluasi) memastikan sistem dapat beradaptasi dan belajar. Penggunaan diagram alur (seperti yang dijelaskan dalam analogi stasiun) sangat membantu visualisasi.</td>
                         </tr>
                         <tr>
-                            <td class="criteria-cell">Usefulness</td>
+                            <td class="criteria-cell">Dampak</td>
                             <td class="score-cell">5</td>
-                            <td class="justification-cell">Arsitektur Pollution Solving Agent (PSA) memberikan blueprint yang bermanfaat bagi pengembang perangkat lunak atau system architect yang ingin membangun solusi Smart City atau manajemen limbah.</td>
+                            <td class="justification-cell">Potensi dampak dari inovasi ini sangat besar. Jika diterapkan, sistem ini tidak hanya dapat mengurangi polusi secara fisik tetapi juga mengubah cara kita berpikir dan mengelola masalah lingkungan, beralih dari pendekatan reaktif ke proaktif dan sistemik.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -512,24 +537,24 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="criteria-cell">Clarity</td>
+                            <td class="criteria-cell">Kurasi</td>
                             <td class="score-cell">5</td>
-                            <td class="justification-cell">Penjelasan mengenai "Paradoks Pendidikan Rekayasa Lingkungan" sangat tajam dan mudah dimengerti. Perbedaan antara Knowledge (F & T) dan Application (S & A) dipisahkan dengan tegas.</td>
+                            <td class="justification-cell">Pengetahuan yang dikurasi sangat relevan dan terstruktur dengan baik. Pemilihan teori (W-Model, PICOC Berlapis, Konstruktivisme) sangat tepat untuk mengatasi "Paradoks Pendidikan Rekayasa Lingkungan" di era AI.</td>
                         </tr>
                         <tr>
-                            <td class="criteria-cell">Logic</td>
+                            <td class="criteria-cell">Kejelasan</td>
                             <td class="score-cell">5</td>
-                            <td class="justification-cell">Solusi "Anti-Answer Constraint" adalah respons logis untuk mencegah ketergantungan pada AI. Penggunaan W-Model dan PICOC Berlapis memberikan struktur pembuktian yang rasional.</td>
+                            <td class="justification-cell">Konsep yang kompleks seperti "W-Model untuk Verifikasi & Validasi Pengetahuan" dan "PICOC Berlapis" dijelaskan dengan sangat jernih melalui diagram dan analogi. Perbedaan antara peran AI sebagai 'Kalkulator Canggih' dan peran manusia sebagai 'Validator Etis' sangat jelas.</td>
                         </tr>
                         <tr>
-                            <td class="criteria-cell">Validity</td>
+                            <td class="criteria-cell">Akurasi</td>
                             <td class="score-cell">5</td>
-                            <td class="justification-cell">Validitas pedagogis tinggi karena menggunakan pendekatan konstruktivisme (membangun pengetahuan sendiri) dan scaffolding. Sesuai dengan prinsip etika AI modern.</td>
+                            <td class="justification-cell">Semua teori dan konsep yang digunakan (seperti hierarki pengetahuan DIKW, model V&V, prinsip pedagogi konstruktivis) didasarkan pada literatur yang mapan dan diinterpretasikan dengan akurat dalam konteks baru.</td>
                         </tr>
                         <tr>
-                            <td class="criteria-cell">Usefulness</td>
+                            <td class="criteria-cell">Daya Guna</td>
                             <td class="score-cell">5</td>
-                            <td class="justification-cell">Sangat bermanfaat bagi pendidik. Contoh prompt reflektif yang diberikan ("Warisan apa yang ingin Anda tinggalkan?") adalah alat praktis yang bisa langsung digunakan di kelas.</td>
+                            <td class="justification-cell">Sangat berdaya guna tinggi bagi pendidik dan pembelajar. Kerangka kerja "Anti-Answer Constraint" dan contoh prompt reflektif memberikan alat praktis untuk mengembangkan pemikiran kritis dan kebijaksanaan (Wisdom) yang tidak dapat ditiru oleh AI.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -541,6 +566,11 @@
             <div class="big-score">5.0 / 5.0</div>
             <p>Perfect Performance</p>
         </div>
+        <div class="peer-link-container" id="peer">
+                <a href="https://docs.google.com/spreadsheets/d/1BEQ-TW-6D26OHkJWRNKBhJ5d9osWKoqEWdxWgUwyWuM/edit?usp=sharing" class="peer-link" target="_blank">
+                    📝 Isi Form Peer to Peer Assessment
+                </a>
+            </div>
 
     </main>
 
