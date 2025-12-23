@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Asesmen II-2100 KIPP - My Opinions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* --- SIDEBAR KIRI (Menu Utama) --- */
+        .sidebar {
+            width: 300px;
+            background-color: #ffffff;
+            padding: 30px 20px;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: 4px 0 20px rgba(0,0,0,0.05);
+            z-index: 10;
+        }
+
+        /* --- SIDEBAR KANAN (Daftar Isi) --- */
+        .right-sidebar {
+            width: 250px;
+            background-color: rgba(255, 255, 255, 0.5);
+            padding: 30px 20px;
+            position: fixed;
+            right: 0;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            border-left: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+            z-index: 10;
+            transform: translateX(10px);
+        }
+
+        .right-sidebar:hover {
+            background-color: #ffffff;
+            box-shadow: -4px 0 20px rgba(0,0,0,0.1);
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .right-sidebar h3 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #feac28;
+        }
+
+        .toc-item {
+            display: block;
+            padding: 8px 15px;
+            margin-bottom: 8px;
+            color: #666;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .toc-item:hover {
+            background-color: rgba(254, 172, 40, 0.1);
+            color: #d38b00;
+            border-left: 3px solid #feac28;
+            transform: translateX(-5px);
+        }
+
+        /* --- Profil --- */
+        .profile {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            gap: 15px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .profile-info nama {
+            font-size: 18px;
+            color: rgb(241, 149, 0);
+            font-weight: 600;
+            display: block;
+        }
+
+        .profile-info p {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        /* --- Menu Items --- */
+        .menu-item {
+            padding: 12px 20px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #555;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(135deg, #feac28 0%, #ff8800 100%);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .menu-item:hover {
+            background-color: rgba(254, 172, 40, 0.1);
+            color: #d38b00;
+            transform: translateX(5px);
+        }
+
+        .menu-item:hover::before {
+            transform: scaleY(1);
+        }
+
+        .menu-item.active {
+            background: linear-gradient(135deg, #feac28 0%, #ff8800 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(254, 172, 40, 0.3);
+        }
+
+        .menu-item svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* --- MAIN CONTENT --- */
+        .main-content {
+            margin-left: 300px;
+            margin-right: 250px;
+            flex: 1;
+            padding: 50px 60px;
+            max-width: 1200px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            font-size: 50px;
+            background: linear-gradient(135deg, #feac28 0%, #ffa719 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            font-weight: 800;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: #fff9f0;
+            border-left: 5px solid #feac28;
+            padding: 20px;
+            margin-bottom: 40px;
+            border-radius: 8px;
+            color: #555;
+            font-style: italic;
+        }
+        
+        .highlight-box strong {
+            color: #d38b00;
+            font-style: normal;
+        }
+
+        /* Hero Image */
+        .opinion-image {
+            width: 100%;
+            height: 300px;
+            /* Ganti 'opinion.jpg' dengan file gambar Anda */
+            background-image: url('opinion.jpg'); 
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            background-color: #ddd; /* Fallback color */
+        }
+
+        /* Content Styling */
+        .content-body {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+        }
+
+        .section-title {
+            font-size: 28px;
+            color: #333;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #feac28;
+            font-weight: 700;
+            scroll-margin-top: 30px;
+        }
+        
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        h3 {
+            font-size: 20px;
+            color: #feac28;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .description {
+            text-align: justify;
+            font-size: 17px;
+            line-height: 1.9;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            line-height: 1.7;
+            color: #444;
+            font-size: 16px;
+        }
+
+        strong {
+            color: #333;
+        }
+
+        /* Responsiveness */
+        @media (max-width: 1200px) {
+            .right-sidebar { display: none; }
+            .main-content { margin-right: 0; padding-right: 40px; }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar { width: 100%; position: relative; height: auto; padding: 20px; border-bottom: 1px solid #eee; }
+            .main-content { margin-left: 0; padding: 30px 20px; }
+            .header h1 { font-size: 36px; }
+            .content-body { padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="profile">
+            <div class="profile-info">
+                <nama>Made Krisna Kusuma Wijaya</nama>
+                <p>18224091</p>
+            </div>
+        </div>
+
+        <nav>
+            <a href="index.html" class="menu-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                Selamat Datang
+            </a>
+            
+            <a href="all-about-me.html" class="menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>UTS-1 All About Me</a>
+            <a href="my-song-for-you.html" class="menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>UTS-2 My Songs for You</a>
+            <a href="my-story.html" class="menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>UTS-3 My Stories for You</a>
+            <a href="my-shape.html" class="menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>UTS-4 My SHAPE</a>
+            <a href="review.html" class="menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>UTS-5 My Personal Reviews</a>
+            
+            <a href="myConcepts.html" class="menu-item">
+                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16.1A5 5 0 0 1 5.9 20M2 12.05A9 9 0 0 1 9.95 20M2 8A13 13 0 0 1 13.95 20M2 4A17 17 0 0 1 17.95 20M2 20h.01"></path></svg>
+                UAS-1 My Concepts
+            </a>
+            
+            <a href="myOpinions.html" class="menu-item active">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+               UAS-2 My Opinions
+           </a>
+
+           <a href="myInovations.html" class="menu-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                UAS-3 My Inovations
+            </a>
+            <a href="myKnowledge.html" class="menu-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                UAS-4 My Knowledge
+            </a>
+            <a href="myProfesional.html" class="menu-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                UAS-5 My Profesional
+            </a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="header" id="top">
+            <h1 style="font-family: Oxygen">UAS-2 My Opinions</h1>
+        </header>
+
+        <div class="opinion-image"></div>
+        
+        <div class="content-body">
+            <div class="highlight-box">
+                <p>Apa itu beropini? <strong>Opini Berpengaruh</strong>. Bagaimana menjadi menarik? <strong>Menjadi Solutif dan Berkelanjutan</strong>.</p>
+                <p style="margin-top: 10px; font-size: 15px;">Ini adalah opini tentang kewajiban moral dan teknis untuk merombak total pembelajaran ilmu rekayasa di tengah krisis iklim, dengan mengusulkan Green VALORAIZE Learning sebagai solusi untuk mentransformasi ruang kelas menjadi inkubator solusi ekologis.</p>
+            </div>
+
+            <h2 class="section-title" id="intro">Transformasi Pendidikan Rekayasa: Dari Pembangunan Ekstraktif ke Rekayasa Regeneratif</h2>
+            <p class="description">
+                <strong>Valorize Learning: Edisi Lingkungan</strong>
+            </p>
+            <p class="description">
+                Dunia pendidikan rekayasa kini berdiri di persimpangan jalan. Antara terus mencetak lulusan yang mengeksploitasi alam demi kemajuan, atau mulai melahirkan generasi baru yang mampu menyembuhkan bumi melalui inovasi. Tulisan ini menawarkan sebuah peta jalan baru.
+            </p>
+
+            <h2 class="section-title" id="krisis">I. Krisis "Buta Ekologi" dalam Pendidikan Rekayasa Modern</h2>
+            <p class="description">
+                Pembelajaran ilmu rekayasa saat ini menghadapi krisis relevansi eksistensial. Selama berabad-abad, kurikulum teknik berfokus pada efisiensi ekonomi dan kinerja mekanis—bagaimana membangun jembatan termurah atau mesin tercepat—namun sering kali abai terhadap biaya ekologis (eksternalitas) yang ditimbulkan.
+            </p>
+            <p class="description">
+                Fakta bahwa 99% populasi dunia menghirup udara tercemar dan miliaran orang mengonsumsi air terkontaminasi adalah bukti kegagalan kolektif rekayasawan masa lalu dalam memperhitungkan dampak jangka panjang dari ciptaan mereka. Di era AI, risiko ini berlipat ganda. Mahasiswa dapat menggunakan AI sebagai "Juru Tulis Cerdas" untuk merancang sistem industri kompleks dalam hitungan detik. Tanpa literasi lingkungan yang mendalam, AI hanya akan menjadi akselerator polusi—mengoptimalkan proses yang merusak dengan kecepatan super.
+            </p>
+            <p class="description">
+                Oleh karena itu, pendidikan rekayasa harus bergeser drastis dari "eksploitasi sumber daya" (mengambil dari alam) menjadi "manajemen siklus hidup" (bekerja bersama alam). Kita tidak bisa lagi mencetak lulusan yang hanya pintar menghitung beban struktur tetapi buta terhadap jejak karbon.
+            </p>
+
+            <h2 class="section-title" id="lab">II. Ruang Kelas sebagai Laboratorium Ekosistem</h2>
+            <p class="description">
+                Transformasi ini menuntut agar ruang kelas tidak lagi menjadi tempat transfer teori kering, melainkan miniatur ekosistem yang hidup. Mahasiswa harus berhenti menjadi "Penghapal Rumus" dan mulai berperan sebagai "Steward of Energon" (Pengelola Energi/Materi).
+            </p>
+            <p class="description">
+                Dalam simulasi lingkungan kerja ini, setiap keputusan desain memiliki konsekuensi. Mahasiswa berlatih menjadi "Protagonis-Penulis" yang bertanggung jawab penuh atas narasi keberlanjutan produk mereka. Tujuannya bukan sekadar membuat alat yang berfungsi, tetapi merancang skema ko-kreasi nilai ekologis, di mana output dari sistem mereka tidak menjadi racun bagi sistem lain (prinsip Zero Waste). Inovasi didefinisikan ulang: bukan hanya tentang kecanggihan teknologi, tetapi seberapa efektif teknologi tersebut memulihkan Environmental Energon yang telah terdegradasi.
+            </p>
+
+            <h2 class="section-title" id="valoraize">III. Green VALORAIZE Learning: Model Ko-Kreasi Nilai Berkelanjutan</h2>
+            <p class="description">
+                Untuk mengoperasionalkan visi ini, pembelajaran VALORAIZE diadaptasi dengan fokus lingkungan. Filosofinya adalah membentuk karakter rekayasawan regeneratif yang mampu menggunakan AI untuk menyelamatkan bumi, bukan memperparahnya.
+            </p>
+
+            <div id="artefak">
+                <h3>1. Penguasaan Materi melalui Penciptaan Artefak Solusi Hijau</h3>
+                <p class="description">Mahasiswa tidak diuji dengan soal pilihan ganda tentang polusi, melainkan ditantang memproduksi Artefak Pengetahuan Hijau yang memiliki nilai mitigasi nyata:</p>
+                <ul>
+                    <li><strong>Peta Pengetahuan Diagnostik (Diagnostic Map):</strong> Mahasiswa mempraktekkan penguasaan materi dasar dengan memetakan sumber polutan (misalnya, melacak jalur limbah mikroplastik atau emisi NO₂). Ini menguji pemahaman fakta (Declarative Knowledge) tentang kondisi status quo lingkungan.</li>
+                    <li><strong>Peta Solusi Sirkular (Circular Solution Map):</strong> Mahasiswa menyusun peta aplikatif yang merancang sistem tertutup. Fokusnya adalah "Bagaimana" mengubah limbah menjadi sumber daya (Waste-to-Resource). Ini menguji kemampuan tingkat tinggi (Analisis & Penciptaan) untuk merekayasa ulang proses industri agar mematuhi ambang batas aman lingkungan sesuai standar WHO.</li>
+                </ul>
+            </div>
+
+            <div id="pasar">
+                <h3>2. Menjual di "Pasar Dampak" (Impact Marketplace)</h3>
+                <p class="description">Sistem penilaian diubah menjadi Impact Marketplace. Di sini, mahasiswa belajar bahwa solusi yang "kotor" tidak laku di masa depan.</p>
+                <ul>
+                    <li><strong>Peran:</strong> Dosen bertindak sebagai "Regulator Lingkungan" atau "Investor Hijau". Mahasiswa bertindak sebagai "Eco-Innovator".</li>
+                    <li><strong>Mata Uang Pembelian:</strong> Karya mahasiswa dinilai ("dibeli") berdasarkan Dampak Lingkungan dan Kelayakan Teknis:</li>
+                    <li><strong>Eco-Credits (Mata Uang Digital):</strong> Diberikan berdasarkan seberapa besar solusi mahasiswa mengurangi polusi atau memulihkan habitat. Semakin tinggi tingkat pemulihan (misalnya, air kotor menjadi air minum standar), semakin tinggi poinnya (Level Bloom Tinggi).</li>
+                    <li><strong>Sustainability Fiat:</strong> Dikaitkan dengan kepatuhan terhadap regulasi global (seperti SDG 13 atau Perjanjian Minamata). Jika desain mahasiswa melanggar batas emisi, karya tersebut "ditolak pasar" atau didenda, mengajarkan konsekuensi nyata dari kelalaian lingkungan.</li>
+                </ul>
+            </div>
+
+            <div id="portofolio">
+                <h3>3. Nilai Akhir Berbasis Portofolio "Rekayasawan Bumi"</h3>
+                <p class="description">Nilai akhir (grade) adalah cerminan dari Portofolio Integritas Ekologis.</p>
+                <ul>
+                    <li><strong>Akumulasi Dampak:</strong> Grade ditentukan oleh total "Eco-Credits" yang dikumpulkan. Seorang mahasiswa bisa saja jago koding, tapi jika kodenya menggerakkan server yang boros energi tanpa mitigasi, nilainya akan rendah.</li>
+                    <li><strong>Jurnal Refleksi Lingkungan:</strong> Portofolio ini mewajibkan Jurnal Pembelajar Reflektif di mana mahasiswa mencatat pergulatan moral mereka: "Bagaimana saya menyeimbangkan biaya murah dengan material ramah lingkungan?", "Bagaimana saya menggunakan AI untuk mendeteksi kebocoran polusi?". Ini membangun Agensi mereka sebagai penjaga bumi, memastikan mereka lulus bukan hanya sebagai teknisi, tetapi sebagai Penyembuh Planet yang kompeten.</li>
+                </ul>
+                <p class="description">
+                    Pendekatan ini memastikan integritas akademik dan ekologis berjalan beriringan: Mahasiswa tidak bisa meminta AI untuk "selesaikan masalah polusi" tanpa memahami mekanismenya, karena mereka harus mempertanggungjawabkan setiap gram emisi dalam portofolio mereka.
+                </p>
+            </div>
+
+        </div>
+    </main>
+
+    <aside class="right-sidebar">
+        <h3>Daftar Isi</h3>
+        <a href="#top" class="toc-item">Judul Halaman</a>
+        <a href="#intro" class="toc-item">Pendahuluan</a>
+        <a href="#krisis" class="toc-item">I. Krisis Buta Ekologi</a>
+        <a href="#lab" class="toc-item">II. Lab Ekosistem</a>
+        <a href="#valoraize" class="toc-item">III. Green VALORAIZE</a>
+        <a href="#artefak" class="toc-item">1. Artefak Solusi Hijau</a>
+        <a href="#pasar" class="toc-item">2. Pasar Dampak</a>
+        <a href="#portofolio" class="toc-item">3. Portofolio Rekayasawan</a>
+    </aside>
+
+</body>
+</html>

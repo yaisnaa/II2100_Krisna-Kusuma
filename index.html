@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Asesmen II-2100 KIPP</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth; /* Agar scroll halus saat diklik */
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* --- SIDEBAR KIRI (Menu Utama) --- */
+        .sidebar {
+            width: 300px;
+            background-color: #ffffff;
+            padding: 30px 20px;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: 4px 0 20px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+
+        /* --- SIDEBAR KANAN (Daftar Isi / Pustaka) --- */
+        .right-sidebar {
+            width: 400px;
+            background-color: rgba(255, 255, 255, 0.6); /* Transparan saat normal */
+            padding: 30px 20px;
+            position: fixed;
+            right: 0;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            border-left: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.3s ease; /* Efek transisi halus */
+            backdrop-filter: blur(5px); /* Efek blur background */
+            z-index: 10;
+            transform: translateX(10px); /* Sedikit geser ke kanan */
+        }
+
+        /* Efek Hover pada Sidebar Kanan */
+        .right-sidebar:hover {
+            background-color: #ffffff; /* Putih solid saat di-hover */
+            box-shadow: -4px 0 20px rgba(0,0,0,0.1);
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .right-sidebar h3 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #feac28;
+        }
+
+        .toc-item {
+            display: block;
+            padding: 10px 15px;
+            margin-bottom: 8px;
+            color: #666;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .toc-item:hover {
+            background-color: rgba(254, 172, 40, 0.1);
+            color: #d38b00;
+            border-left: 3px solid #feac28;
+            transform: translateX(-5px);
+        }
+
+        /* --- Styling Profil Kiri --- */
+        .profile {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            gap: 15px;
+        }
+
+        .profile-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgb(0, 0, 0);
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .profile-info h2 {
+            font-size: 20px;
+            color: rgb(0, 0, 0);
+            margin-bottom: 3px;
+            font-weight: 600;
+        }
+        .profile-info nama {
+            font-size: 20px;
+            color: rgb(241, 149, 0);
+            margin-bottom: 3px;
+            font-weight: 600;
+        }
+
+        .profile-info p {
+            font-size: 16px;
+            color: #000000;
+        }
+
+        /* --- Menu Items Kiri --- */
+        .menu-item {
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #000000;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background: linear-gradient(135deg, #523701 0%, #6b4400 100%);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .menu-item:hover {
+            background-color: rgba(255,255,255,0.1);
+            transform: translateX(5px);
+        }
+
+        .menu-item:hover::before {
+            transform: scaleY(1);
+        }
+
+        .menu-item.active {
+            background-color: rgb(241, 149, 0);
+            color: white;
+            box-shadow: 0 4px 15px rgba(126, 89, 0, 0.3);
+        }
+
+        .menu-item.active::before {
+            transform: scaleY(1);
+        }
+
+        .menu-item svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* --- CONTENT AREA --- */
+        .main-content {
+            margin-left: 300px;
+            margin-right: 250px; /* Memberi ruang untuk sidebar kanan */
+            flex: 1;
+            padding: 50px 80px;
+            max-width: 1200px; /* Membatasi lebar agar enak dibaca */
+        }
+        
+        .main-content2 {
+            margin: 20px 0;
+            flex: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            font-size: 60px;
+            background: linear-gradient(135deg, #feac28 0%, #ffa719 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            font-weight: 700;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header p {
+            font-size: 24px;
+            color: #666;
+            animation: fadeInUp 1s ease;
+        }
+
+        .about-image {
+            width: 100%;
+            max-width: 1200px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            color: white;
+            margin: 0 auto 40px auto;
+            background-image: url('bg1.png');
+            box-shadow: 0 15px 40px rgba(234, 181, 102, 0.15);
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .about-image:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(234, 183, 102, 0.4);
+        }
+
+        .description {
+            text-align: justify;
+            font-size: 17px;
+            line-height: 1.9;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .footer-message {
+            background: linear-gradient(135deg, #ffb847 0%, #ffc547 100%);
+            color: rgb(92, 60, 0);
+            padding: 20px;
+            font-size: 16px;
+            line-height: 1.8;
+            box-shadow: 0 10px 30px rgba(107, 82, 0, 0.15);
+            position: relative;
+            margin-top: 50px;
+        }
+
+        .footer-message::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #eacd66 0%, #a28f4b 50%, #fbdd93 100%);
+        }
+
+        /* Responsiveness */
+        @media (max-width: 1200px) {
+            .right-sidebar {
+                display: none; /* Sembunyikan sidebar kanan di layar kecil */
+            }
+            .main-content {
+                margin-right: 0;
+                padding-right: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                position: relative;
+                height: auto;
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 30px 20px;
+            }
+            .header h1 {
+                font-size: 42px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="profile">
+            <div class="profile-info">
+                <nama>Made Krisna Kusuma Wijaya</nama>
+                <p>18224091</p>
+            </div>
+        </div>
+
+        <nav>
+            <a href="index.html" class="menu-item active">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                Selamat Datang
+            </a>
+            <a href="all-about-me.html" class="menu-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                UTS-1 All About Me
+            </a>
+            <a href="my-song-for-you.html" class="menu-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 18V5l12-2v13"></path>
+                    <circle cx="6" cy="18" r="3"></circle>
+                    <circle cx="18" cy="16" r="3"></circle>
+                </svg>
+                UTS-2 My Songs for You
+            </a>
+            <a href="my-story.html" class="menu-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                </svg>
+                UTS-3 My Stories for You
+            </a>
+            <a href="my-shape.html" class="menu-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+                UTS-4 My SHAPE
+            </a>
+            <a href="review.html" class="menu-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+                UTS-5 My Personal Reviews
+            </a>
+            <a href="myConcepts.html" class="menu-item">
+                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+                UAS-1 My Concepts
+            </a>
+            <a href="myOpinions.html" class="menu-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                   <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                   <polyline points="14 2 14 8 20 8"></polyline>
+                   <line x1="16" y1="13" x2="8" y2="13"></line>
+                   <line x1="16" y1="17" x2="8" y2="17"></line>
+                   <polyline points="10 9 9 9 8 9"></polyline>
+               </svg>
+               UAS-2 My Opinions
+           </a>
+           <a href="myInovations.html" class="menu-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+                UAS-3 My Inovations
+            </a>
+            <a href="myKnowledge.html" class="menu-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+                UAS-4 My Knowledge
+            </a>
+            <a href="myProfesional.html" class="menu-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+                UAS-5 My Profesional
+            </a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="header" id="bab-intro">
+            <h1 style= "font-family: Oxygen">Krisna punya Cerita</h1>
+            <p>Portfolio Asesmen <b>II-2100 KIPP</b></p>
+        </header>
+        
+        <div class="about-image"></div>
+        
+        <main class="main-content2">
+            <div id="bab-profil">
+                <p class="description">
+                    Krisna, seorang bocah yang sedang melanjutkan study-nya di Sekolah Teknik Elektro dan Informatika jurusan Sistem dan Teknologi Informasi. Ia memiliki cita cita besar untuk merubah teknologi dunia dengan melakukan inovasi masif.
+                </p>
+            </div>
+            
+            <div id="bab-tujuan">
+                <p class="description">
+                    Di situs ini, saya mendokumentasikan berbagai pembelajaran, refleksi pribadi, serta karya yang dihasilkan selama perkuliahan. Setiap bagian menggambarkan penerapan konsep komunikasi seperti kesadaran diri empati, dan mendengarkan aktif dalam konteks kehidupan akademik dan profesional.
+                </p>
+            </div>
+        </main>
+
+        <div class="footer-message" id="bab-penutup">
+            Tujuan dari pembuatan website ini adalah untuk menunjukkan bahwa komunikasi bukan hanya keterampilan berbicara, tetapi juga seni membangun makna bersama, memahami diri, dan menciptakan hubungan yang lebih bermakna.
+        </div>
+    </main>
+
+    <aside class="right-sidebar">
+        <h3>Daftar Isi</h3>
+        <a href="#bab-intro" class="toc-item">Pendahuluan</a>
+        <a href="#bab-profil" class="toc-item">Profil Singkat</a>
+        <a href="#bab-tujuan" class="toc-item">Tujuan Portfolio</a>
+        <a href="#bab-penutup" class="toc-item">Penutup & Pesan</a>
+    </aside>
+
+</body>
+</html>

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Asesmen II-2100 KIPP - My Concepts</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth; /* Scroll halus untuk navigasi */
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* --- SIDEBAR KIRI (Menu Utama) --- */
+        .sidebar {
+            width: 300px;
+            background-color: #ffffff;
+            padding: 30px 20px;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: 4px 0 20px rgba(0,0,0,0.05);
+            z-index: 10;
+        }
+
+        /* --- SIDEBAR KANAN (Daftar Isi) --- */
+        .right-sidebar {
+            width: 250px;
+            background-color: rgba(255, 255, 255, 0.5); /* Transparan saat normal */
+            padding: 30px 20px;
+            position: fixed;
+            right: 0;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            border-left: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.3s ease; /* Transisi halus */
+            backdrop-filter: blur(8px); /* Efek blur */
+            z-index: 10;
+            transform: translateX(10px); /* Sedikit geser keluar */
+        }
+
+        /* Efek Hover Sidebar Kanan */
+        .right-sidebar:hover {
+            background-color: #ffffff; /* Solid saat hover */
+            box-shadow: -4px 0 20px rgba(0,0,0,0.1);
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .right-sidebar h3 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #feac28;
+        }
+
+        .toc-item {
+            display: block;
+            padding: 8px 15px;
+            margin-bottom: 8px;
+            color: #666;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .toc-item:hover {
+            background-color: rgba(254, 172, 40, 0.1);
+            color: #d38b00;
+            border-left: 3px solid #feac28;
+            transform: translateX(-5px);
+        }
+
+        /* --- Profil Kiri --- */
+        .profile {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            gap: 15px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .profile-info nama {
+            font-size: 18px;
+            color: rgb(241, 149, 0);
+            font-weight: 600;
+            display: block;
+        }
+
+        .profile-info p {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        /* --- Menu Items Kiri --- */
+        .menu-item {
+            padding: 12px 20px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #555;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(135deg, #feac28 0%, #ff8800 100%);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .menu-item:hover {
+            background-color: rgba(254, 172, 40, 0.1);
+            color: #d38b00;
+            transform: translateX(5px);
+        }
+
+        .menu-item:hover::before {
+            transform: scaleY(1);
+        }
+
+        .menu-item.active {
+            background: linear-gradient(135deg, #feac28 0%, #ff8800 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(254, 172, 40, 0.3);
+        }
+
+        .menu-item svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* --- MAIN CONTENT AREA --- */
+        .main-content {
+            margin-left: 300px;
+            margin-right: 250px; /* Ruang untuk sidebar kanan */
+            flex: 1;
+            padding: 50px 60px;
+            max-width: 1200px; /* Membatasi lebar konten agar nyaman dibaca */
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            font-size: 50px;
+            background: linear-gradient(135deg, #feac28 0%, #ffa719 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            font-weight: 800;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Styling Gambar --- */
+        .concept-image {
+            width: 100%;
+            height: 350px;
+            /* GANTI URL DI BAWAH INI DENGAN GAMBAR ANDA */
+            background-image: url('concept.jpg'); 
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .concept-image:hover {
+             transform: translateY(-5px);
+        }
+
+        /* --- Styling Teks Konten --- */
+        .content-body {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+        }
+
+        .section-title {
+            font-size: 28px;
+            color: #333;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #feac28;
+            font-weight: 700;
+            scroll-margin-top: 30px; /* Agar saat diklik di TOC tidak terlalu mepet atas */
+        }
+        
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .description {
+            text-align: justify;
+            font-size: 17px;
+            line-height: 1.9;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        /* Styling List Referensi */
+        .reference-list {
+            margin-left: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .reference-list li {
+            margin-bottom: 15px;
+            line-height: 1.7;
+            color: #444;
+            font-size: 16px;
+        }
+        
+        .reference-list strong {
+            color: #feac28;
+        }
+
+        /* Responsiveness */
+        @media (max-width: 1200px) {
+            .right-sidebar {
+                display: none; /* Sembunyikan sidebar kanan di layar sedang */
+            }
+            .main-content {
+                margin-right: 0;
+                padding-right: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                position: relative;
+                height: auto;
+                padding: 20px;
+                box-shadow: none;
+                border-bottom: 1px solid #eee;
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 30px 20px;
+            }
+            .header h1 {
+                font-size: 36px;
+            }
+            .content-body {
+                padding: 25px;
+            }
+            .section-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="profile">
+            <div class="profile-info">
+                <nama>Made Krisna Kusuma Wijaya</nama>
+                <p>18224091</p>
+            </div>
+        </div>
+
+        <nav>
+            <a href="index.html" class="menu-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                Selamat Datang
+            </a>
+            <a href="all-about-me.html" class="menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>UTS-1 All About Me</a>
+            <a href="my-song-for-you.html" class="menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>UTS-2 My Songs for You</a>
+            <a href="my-story.html" class="menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>UTS-3 My Stories for You</a>
+            <a href="my-shape.html" class="menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>UTS-4 My SHAPE</a>
+            <a href="review.html" class="menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>UTS-5 My Personal Reviews</a>
+            
+            <a href="myConcepts.html" class="menu-item active">
+                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16.1A5 5 0 0 1 5.9 20M2 12.05A9 9 0 0 1 9.95 20M2 8A13 13 0 0 1 13.95 20M2 4A17 17 0 0 1 17.95 20M2 20h.01"></path></svg>
+                UAS-1 My Concepts
+            </a>
+            <a href="myOpinions.html" class="menu-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+               UAS-2 My Opinions
+           </a>
+           <a href="myInovations.html" class="menu-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                UAS-3 My Inovations
+            </a>
+            <a href="myKnowledge.html" class="menu-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                UAS-4 My Knowledge
+            </a>
+            <a href="myProfesional.html" class="menu-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                UAS-5 My Profesional
+            </a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="header" id="top">
+            <h1 style="font-family: Oxygen">UAS-1 My Concepts</h1>
+        </header>
+
+        <div class="concept-image"></div>
+        
+        <div class="content-body">
+            <h2 class="section-title" id="mahakarya">Mahakarya Restorasi Ekologis: Menyelaraskan Nafas Bumi dan Ambisi Manusia</h2>
+            
+            <p class="description">
+                Konsep saya tentang "Mahakarya Rekayasa Lingkungan" melampaui sekadar instalasi teknologi pembersih atau regulasi kaku; ia adalah sebuah sistem imunologi planetar yang dirancang untuk memulihkan homeostasis Bumi. Krisis degradasi lingkungan—mulai dari polusi udara yang meracuni 99% populasi global hingga kontaminasi air yang mengancam miliaran jiwa—pada intinya adalah manifestasi dari "kegagalan sistemik kecerdasan kolektif". Kita telah memutus siklus umpan balik antara konsumsi dan regenerasi. Untuk memulihkan kerusakan ini, kita harus merekayasa ulang interaksi kita dengan biosfer melalui arsitektur Triune Intelligence (Kecerdasan Tripartit).
+            </p>
+
+            <h2 class="section-title" id="hati">Hati (Kecerdasan Manusia / Homocordium)</h2>
+            <p class="description">
+                Ini adalah Ecological Axiological Intelligence (Eco-AQ) kolektif kita. Dalam konteks degradasi lingkungan, "Hati" berfungsi sebagai alarm moral dan kompas etika yang mendefinisikan ulang hubungan manusia dengan alam—bukan sebagai penakluk, melainkan sebagai steward (pengelola).
+            </p>
+            <p class="description">
+                Data yang menunjukkan bahwa 7 juta kematian dini terjadi akibat polusi udara dan kerusakan habitat bukan sekadar statistik medis; itu adalah panggilan nurani bagi Homocordium. Tanpa "Hati" yang selaras, upaya konservasi hanya akan menjadi formalitas birokratis. Di sinilah Komunikasi Publik berperan vital untuk menanamkan nilai bahwa udara bersih dan air jernih adalah hak asasi fundamental, sejalan dengan mandat SDG 3, 13, 14, dan 15. "Hati" memastikan bahwa kita tidak menukar kesehatan jangka panjang spesies kita demi keuntungan ekonomi jangka pendek.
+            </p>
+
+            <h2 class="section-title" id="pikiran">Pikiran (Kecerdasan Buatan / Homodeus)</h2>
+            <p class="description">
+                Ini adalah Synergistic Practical Intelligence (PI-A) yang diarahkan untuk pemantauan dan mitigasi presisi. Dalam menghadapi polusi yang tidak kasat mata (seperti PM2.5 atau mikroplastik), indra manusia memiliki keterbatasan. Di sinilah AI berperan sebagai "Indra Planetar Digital".
+            </p>
+            <p class="description">
+                AI dan LLM berfungsi sebagai Smart Scribe yang memproses triliunan titik data lingkungan—dari satelit pemantau deforestasi hingga sensor kualitas air—secara real-time. Namun, AI tidak membuat kebijakan. Manusia, menggunakan PI-A, harus menginterpretasikan data ini untuk merancang strategi intervensi yang kompleks, seperti memprediksi penyebaran limbah industri atau mengoptimalkan rantai pasok sirkular untuk meminimalkan jejak karbon. Pikiran manusia mengorkestrasi algoritma untuk mendeteksi anomali lingkungan sebelum menjadi bencana yang tidak dapat diubah.
+            </p>
+
+            <h2 class="section-title" id="tenaga">Tenaga (Kecerdasan Alam / Natural Intelligence)</h2>
+            <p class="description">
+                Ini adalah manajemen Environmental Energon yang kritis. Masalah polusi timbul karena kita memaksakan ekstraksi energi dan materi melebihi kapasitas regeneratif alam, dan membuang sisa entropi (limbah) melebihi kapasitas penyerapannya.
+            </p>
+            <p class="description">
+                Mahakarya Rekayasa Lingkungan harus ditenagai oleh CORE Engine yang telah dikalibrasi ulang. Mesin ini tidak boleh lagi hanya mengoptimalkan Product dan Value ekonomi semata, tetapi harus menempatkan dimensi Environmental sebagai prioritas dalam PSKVE Engine. Tujuannya adalah memastikan bahwa setiap unit "Human Energon" (usaha manusia) yang dikeluarkan tidak hanya menghasilkan barang, tetapi juga berkontribusi pada pemulihan "Environmental Energon" (misalnya, reforestasi atau purifikasi air). Ini adalah transisi dari ekonomi ekstraktif menuju ekonomi regeneratif.
+            </p>
+
+            <h2 class="section-title" id="kesimpulan">Kesimpulan Sistem TISE Global</h2>
+            <p class="description">
+                Oleh karena itu, Mahakarya Rekayasa di era krisis iklim ini bukanlah sekadar teknologi penangkap karbon. Mahakarya itu adalah sistem TISE global yang memberdayakan 8 miliar manusia sebagai "Protagonis-Penulis" kisah pemulihan Bumi. Melalui sistem ini, kita menyelaraskan Hati untuk peduli, menggunakan Pikiran (AI) untuk melihat jalan keluar, dan mengerahkan Tenaga untuk membersihkan warisan polusi kita, memastikan keberlanjutan hidup bagi generasi mendatang.
+            </p>
+
+            <h2 class="section-title" id="referensi">Referensi Pendukung</h2>
+            <p class="description">Data dan fakta yang digunakan dalam konstruksi konsep di atas merujuk pada sumber-sumber berikut:</p>
+            <ul class="reference-list">
+                <li><strong>World Health Organization (WHO). (2022).</strong> Air quality database update 2022. Menyatakan bahwa 99% populasi global menghirup udara yang melebihi batas pedoman kualitas udara WHO, dan mengestimasi 7 juta kematian dini per tahun akibat polusi udara.</li>
+                <li><strong>Science Journal. (2023).</strong> Global assessment of water pollution. Mengestimasi bahwa sekitar 4,4 miliar orang di negara berpenghasilan rendah dan menengah meminum air yang terkontaminasi, menyoroti krisis polusi air global.</li>
+                <li><strong>United Nations. (2015).</strong> Sustainable Development Goals (SDGs). Khususnya SDG 3 (Good Health and Well-being), SDG 13 (Climate Action), SDG 14 (Life Below Water), dan SDG 15 (Life on Land) sebagai kerangka kerja global untuk penanganan degradasi lingkungan.</li>
+                <li><strong>CDC & FSIN Platform.</strong> Data terkait dampak kesehatan lingkungan dan kerentanan populasi terhadap penyakit akibat polusi.</li>
+            </ul>
+        </div>
+    </main>
+
+    <aside class="right-sidebar">
+        <h3>Daftar Isi</h3>
+        <a href="#top" class="toc-item">Judul Halaman</a>
+        <a href="#mahakarya" class="toc-item">Mahakarya Restorasi Ekologis</a>
+        <a href="#hati" class="toc-item">Hati (Homocordium)</a>
+        <a href="#pikiran" class="toc-item">Pikiran (Homodeus)</a>
+        <a href="#tenaga" class="toc-item">Tenaga (Natural Intelligence)</a>
+        <a href="#kesimpulan" class="toc-item">Kesimpulan TISE</a>
+        <a href="#referensi" class="toc-item">Referensi Pendukung</a>
+    </aside>
+
+</body>
+</html>

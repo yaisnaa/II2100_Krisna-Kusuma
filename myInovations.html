@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Asesmen II-2100 KIPP - My Innovations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* --- SIDEBAR KIRI (Menu Utama) --- */
+        .sidebar {
+            width: 300px;
+            background-color: #ffffff;
+            padding: 30px 20px;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: 4px 0 20px rgba(0,0,0,0.05);
+            z-index: 10;
+        }
+
+        /* --- SIDEBAR KANAN (Daftar Isi) --- */
+        .right-sidebar {
+            width: 250px;
+            background-color: rgba(255, 255, 255, 0.5);
+            padding: 30px 20px;
+            position: fixed;
+            right: 0;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            border-left: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+            z-index: 10;
+            transform: translateX(10px);
+        }
+
+        .right-sidebar:hover {
+            background-color: #ffffff;
+            box-shadow: -4px 0 20px rgba(0,0,0,0.1);
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .right-sidebar h3 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #feac28;
+        }
+
+        .toc-item {
+            display: block;
+            padding: 8px 15px;
+            margin-bottom: 8px;
+            color: #666;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .toc-item:hover {
+            background-color: rgba(254, 172, 40, 0.1);
+            color: #d38b00;
+            border-left: 3px solid #feac28;
+            transform: translateX(-5px);
+        }
+
+        /* --- Profil --- */
+        .profile {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            gap: 15px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .profile-info nama {
+            font-size: 18px;
+            color: rgb(241, 149, 0);
+            font-weight: 600;
+            display: block;
+        }
+
+        .profile-info p {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        /* --- Menu Items --- */
+        .menu-item {
+            padding: 12px 20px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #555;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(135deg, #feac28 0%, #ff8800 100%);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .menu-item:hover {
+            background-color: rgba(254, 172, 40, 0.1);
+            color: #d38b00;
+            transform: translateX(5px);
+        }
+
+        .menu-item:hover::before {
+            transform: scaleY(1);
+        }
+
+        .menu-item.active {
+            background: linear-gradient(135deg, #feac28 0%, #ff8800 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(254, 172, 40, 0.3);
+        }
+
+        .menu-item svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* --- MAIN CONTENT --- */
+        .main-content {
+            margin-left: 300px;
+            margin-right: 250px;
+            flex: 1;
+            padding: 50px 60px;
+            max-width: 1200px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            font-size: 50px;
+            background: linear-gradient(135deg, #feac28 0%, #ffa719 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            font-weight: 800;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hero Image */
+        .innovation-image {
+            width: 100%;
+            height: 350px;
+            /* Ganti dengan gambar inovasi Anda */
+            background-image: url('innovation.jpg'); 
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            background-color: #ddd;
+        }
+
+        /* Content Styling */
+        .content-body {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+        }
+
+        .highlight-box {
+            background: #fff9f0;
+            border-left: 5px solid #feac28;
+            padding: 20px;
+            margin-bottom: 40px;
+            border-radius: 8px;
+            font-style: italic;
+            color: #555;
+        }
+
+        .section-title {
+            font-size: 28px;
+            color: #333;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #feac28;
+            font-weight: 700;
+            scroll-margin-top: 30px;
+        }
+        
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        h3 {
+            font-size: 20px;
+            color: #feac28;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            scroll-margin-top: 20px;
+        }
+
+        .description {
+            text-align: justify;
+            font-size: 17px;
+            line-height: 1.9;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 12px;
+            line-height: 1.7;
+            color: #444;
+            font-size: 16px;
+        }
+
+        strong {
+            color: #333;
+        }
+
+        /* Responsiveness */
+        @media (max-width: 1200px) {
+            .right-sidebar { display: none; }
+            .main-content { margin-right: 0; padding-right: 40px; }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar { width: 100%; position: relative; height: auto; padding: 20px; border-bottom: 1px solid #eee; }
+            .main-content { margin-left: 0; padding: 30px 20px; }
+            .header h1 { font-size: 36px; }
+            .content-body { padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="profile">
+            <div class="profile-info">
+                <nama>Made Krisna Kusuma Wijaya</nama>
+                <p>18224091</p>
+            </div>
+        </div>
+
+        <nav>
+            <a href="index.html" class="menu-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                Selamat Datang
+            </a>
+            
+            <a href="all-about-me.html" class="menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>UTS-1 All About Me</a>
+            <a href="my-song-for-you.html" class="menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>UTS-2 My Songs for You</a>
+            <a href="my-story.html" class="menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>UTS-3 My Stories for You</a>
+            <a href="my-shape.html" class="menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>UTS-4 My SHAPE</a>
+            <a href="review.html" class="menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>UTS-5 My Personal Reviews</a>
+            
+            <a href="myConcepts.html" class="menu-item">
+                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16.1A5 5 0 0 1 5.9 20M2 12.05A9 9 0 0 1 9.95 20M2 8A13 13 0 0 1 13.95 20M2 4A17 17 0 0 1 17.95 20M2 20h.01"></path></svg>
+                UAS-1 My Concepts
+            </a>
+            <a href="myOpinions.html" class="menu-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+               UAS-2 My Opinions
+           </a>
+
+           <a href="myInovations.html" class="menu-item active">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                UAS-3 My Inovations
+            </a>
+            
+            <a href="myKnowledge.html" class="menu-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                UAS-4 My Knowledge
+            </a>
+            <a href="myProfesional.html" class="menu-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                UAS-5 My Profesional
+            </a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="header" id="top">
+            <h1 style="font-family: Oxygen">UAS-3 My Innovations</h1>
+        </header>
+
+        <div class="innovation-image"></div>
+        
+        <div class="content-body">
+            <div class="highlight-box">
+                <p><strong>PUDAL & TISE 2.0</strong></p>
+                <p>Inovasi utama saya adalah pengembangan paradigma Eco-Triune Intelligence Smart Engineering (Eco-TISE) dan evolusinya menuju TISE 2.0. Fokus utamanya adalah ko-kreasi narasi Regenerasi dan pemberdayaan Agensi Ekologis manusia.</p>
+            </div>
+
+            <h2 class="section-title" id="intro">TISE 2.0: Arsitektur "Teater Pemulihan" Planetar</h2>
+            <p class="description">
+                Jika TISE 1.0 berfokus pada efisiensi industri yang seringkali menghasilkan eksternalitas negatif (polusi), TISE 2.0 mengambil arsitektur ini dan mengkalibrasi ulang tujuannya untuk misi penyelamatan biosfer. "Teater kerja" dalam konteks ini adalah Sub-Ruang PSKVE Lingkungan—sebuah zona rehabilitasi digital-fisik yang dirancang untuk memberdayakan rekayasawan lingkungan dalam membalikkan arus degradasi.
+            </p>
+
+            <h2 class="section-title" id="arsitektur">Komponen Arsitektur Operasional</h2>
+
+            <div id="stasion">
+                <h3>1. Stasion (Titik Pertukaran Entropi)</h3>
+                <p class="description">Ini adalah hub fungsional di mana status lingkungan diubah.</p>
+                <ul>
+                    <li><strong>Stasiun A (Degradasi):</strong> Kondisi saat ini, di mana udara mengandung PM2.5 berbahaya dan air terkontaminasi logam berat (status entropi tinggi).</li>
+                    <li><strong>Stasiun B (Regenerasi):</strong> Kondisi target, di mana ekosistem pulih dan memenuhi standar baku mutu WHO (status negentropi/keteraturan).</li>
+                </ul>
+                <p class="description">Di stasiun inilah "Environmental Energon" diproses—mengubah "Limbah" menjadi "Sumber Daya" atau menetralkan racun.</p>
+            </div>
+
+            <div id="pudal">
+                <h3>2. Kendaraan (Agen Eco-PUDAL)</h3>
+                <p class="description">
+                    Untuk bergerak dari Stasiun A (Tercemar) ke Stasiun B (Bersih), stakeholder membutuhkan "kendaraan". Ini bukan truk sampah fisik semata, melainkan Pollution Solving Agent (PSA) yang cerdas. Arsitektur kognitif agen ini adalah sistem <strong>PUDAL</strong> yang beroperasi secara real-time:
+                </p>
+                <ul>
+                    <li><strong>Perceive (Persepsi):</strong> Agen membaca data sensor IoT global (satelit, sensor air) untuk mendeteksi anomali polusi.</li>
+                    <li><strong>Understand (Pemahaman):</strong> Agen memetakan pola penyebaran polutan menggunakan basis data lingkungan global.</li>
+                    <li><strong>Decision (Keputusan):</strong> Agen merekomendasikan strategi mitigasi (misalnya: "Aktifkan protokol filtrasi darurat").</li>
+                    <li><strong>Act (Tindakan):</strong> Eksekusi intervensi teknis atau kebijakan.</li>
+                    <li><strong>Learning (Evaluasi):</strong> Mempelajari efektivitas intervensi untuk mencegah polusi di masa depan.</li>
+                </ul>
+            </div>
+
+            <div id="rute">
+                <h3>3. Jaringan Rute Jalan (Siklus Mitigasi Hijau)</h3>
+                <p class="description">"Kendaraan" (Agen Eco-PUDAL) bergerak mengikuti Siklus 7-Langkah Pemecahan Masalah Lingkungan:</p>
+                <ul>
+                    <li><strong>Identifikasi Masalah:</strong> Deteksi lonjakan emisi karbon atau kebocoran limbah.</li>
+                    <li><strong>Picu/Trigger:</strong> Peringatan dini (Early Warning System) aktif.</li>
+                    <li><strong>Kejadian/Event:</strong> Insiden polusi terjadi atau terdeteksi.</li>
+                    <li><strong>Baca STATUS:</strong> Pengukuran presisi tingkat kontaminasi (misal: "Kadar Merkuri melebihi ambang batas aman 50%").</li>
+                    <li><strong>Evaluasi:</strong> Analisis dampak kesehatan terhadap populasi terdampak (mengacu pada data morbiditas 7 juta kematian WHO).</li>
+                    <li><strong>Adaptasi:</strong> Implementasi teknologi remediasi (pembersihan) atau perubahan regulasi mendadak.</li>
+                    <li><strong>Selesai/Lesson Learned:</strong> Lingkungan pulih, data masuk ke repository pengetahuan untuk mencegah rekurensi.</li>
+                </ul>
+            </div>
+
+            <div id="core">
+                <h3>4. Teknologi CORE Engine (Mesin Sirkular)</h3>
+                <p class="description">
+                    Agen Eco-PUDAL membutuhkan tenaga yang disediakan oleh CORE Engine yang dimodifikasi menjadi Circular Energon Engine. 
+
+[Image of circular economy diagram]
+ Mesin ini beroperasi dengan prinsip termodinamika ekonomi sirkular:
+                </p>
+                <ul>
+                    <li><strong>Input:</strong> Material buangan (plastik, emisi gas, limbah cair).</li>
+                    <li><strong>Transduksi:</strong> Proses daur ulang molekuler, filtrasi karbon, atau bioremidiasi.</li>
+                    <li><strong>Output:</strong> Energi bersih, material baru, atau udara murni.</li>
+                </ul>
+                <p class="description">
+                    Mesin ini memastikan bahwa tidak ada energi yang hilang begitu saja ("waste"), melainkan dikembalikan ke dalam siklus produksi PSKVE (Product, Service, Knowledge, Value, Environmental).
+                </p>
+            </div>
+
+            <div id="riset">
+                <h3>5. Fundamental Riset PSKVE (Bahan Bakar Ekologis)</h3>
+                <p class="description">
+                    CORE Engine tidak bisa berjalan tanpa ilmu pengetahuan. "Bahan bakar" utamanya adalah Riset Fundamental Lingkungan. Ini mencakup penemuan material baru penyerap karbon, bioteknologi pengurai plastik, dan studi epidemiologi dampak polusi. Riset inilah yang memberikan prinsip-prinsip konversi "Toxic Energon" menjadi "Vital Energon" yang aman bagi kehidupan.
+                </p>
+            </div>
+
+            <h2 class="section-title" id="kesimpulan">Kesimpulan Arsitektur</h2>
+            <p class="description">
+                Singkatnya, inovasi TISE 2.0 dalam konteks ini adalah arsitektur full-stack untuk penyembuhan bumi: dimulai dari Riset Lingkungan (prinsip), ditenagai oleh Circular CORE Engine (teknologi), dieksekusi oleh Agen Eco-PUDAL (kecerdasan sistemik), yang berjalan di atas Siklus Mitigasi Hijau (alur kerja), untuk memindahkan status bumi dari Stasiun Degradasi menuju Stasiun Regenerasi, di dalam Teater Pemulihan Global.
+            </p>
+        </div>
+    </main>
+
+    <aside class="right-sidebar">
+        <h3>Daftar Isi</h3>
+        <a href="#top" class="toc-item">Judul Halaman</a>
+        <a href="#intro" class="toc-item">TISE 2.0 & Teater Pemulihan</a>
+        <a href="#stasion" class="toc-item">1. Stasion (Entropi)</a>
+        <a href="#pudal" class="toc-item">2. Kendaraan (Eco-PUDAL)</a>
+        <a href="#rute" class="toc-item">3. Jaringan Rute Jalan</a>
+        <a href="#core" class="toc-item">4. Teknologi CORE Engine</a>
+        <a href="#riset" class="toc-item">5. Fundamental Riset</a>
+        <a href="#kesimpulan" class="toc-item">Kesimpulan</a>
+    </aside>
+
+</body>
+</html>

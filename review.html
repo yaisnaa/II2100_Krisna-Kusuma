@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Asesmen II-2100 KIPP - Reviews</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth; /* Scroll halus */
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* --- SIDEBAR KIRI (Menu) --- */
+        .sidebar {
+            width: 300px;
+            background-color: #ffffff;
+            padding: 30px 20px;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: 4px 0 20px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+
+        /* --- SIDEBAR KANAN (Daftar Isi) --- */
+        .right-sidebar {
+            width: 400px;
+            background-color: rgba(255, 255, 255, 0.6); /* Transparan saat normal */
+            padding: 30px 20px;
+            position: fixed;
+            right: 0;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            border-left: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.3s ease; /* Transisi halus */
+            backdrop-filter: blur(5px); /* Efek blur */
+            z-index: 10;
+            transform: translateX(10px);
+        }
+
+        /* Efek Hover Sidebar Kanan */
+        .right-sidebar:hover {
+            background-color: #ffffff; /* Solid saat hover */
+            box-shadow: -4px 0 20px rgba(0,0,0,0.1);
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .right-sidebar h3 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f19500;
+        }
+
+        .toc-item {
+            display: block;
+            padding: 10px 15px;
+            margin-bottom: 8px;
+            color: #666;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .toc-item:hover {
+            background-color: rgba(241, 149, 0, 0.1);
+            color: #d38b00;
+            border-left: 3px solid #f19500;
+            transform: translateX(-5px);
+        }
+
+        /* --- Profil Kiri --- */
+        .profile {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            gap: 15px;
+        }
+
+        .profile-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #f19500 0%, #ff8800 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(241, 149, 0, 0.4);
+            border-radius: 8px;
+        }
+
+        .profile-info nama {
+            font-size: 18px;
+            color: #f19500;
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .profile-info p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* --- Menu Items --- */
+        .menu-item {
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #333;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background: linear-gradient(135deg, #f19500 0%, #ff8800 100%);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .menu-item:hover {
+            background-color: rgba(241, 149, 0, 0.1);
+            transform: translateX(5px);
+        }
+
+        .menu-item:hover::before {
+            transform: scaleY(1);
+        }
+
+        .menu-item.active {
+            background-color: rgb(241, 149, 0);
+            color: white;
+            box-shadow: 0 4px 15px rgba(241, 149, 0, 0.3);
+        }
+
+        .menu-item.active::before {
+            transform: scaleY(1);
+            background: white;
+        }
+
+        .menu-item svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* --- MAIN CONTENT --- */
+        .main-content {
+            margin-left: 300px;
+            margin-right: 250px; /* Ruang untuk sidebar kanan */
+            flex: 1;
+            padding: 40px 60px;
+            max-width: 1400px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .header h1 {
+            font-size: 60px;
+            background: linear-gradient(135deg, #f19500 0%, #ff8800 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .content-wrapper {
+            background: white;
+            border-radius: 12px;
+            padding: 50px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            animation: fadeInUp 1s ease;
+        }
+
+        .section-title {
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 25px;
+            font-weight: 700;
+            border-left: 5px solid #f19500;
+            padding-left: 20px;
+            scroll-margin-top: 20px;
+        }
+
+        .identity-section {
+            background: linear-gradient(135deg, #fff5e6 0%, #ffe6cc 100%);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+            border: 2px solid #f19500;
+            scroll-margin-top: 20px;
+        }
+
+        .identity-section h2 {
+            font-size: 20px;
+            color: #f19500;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .identity-section p {
+            font-size: 16px;
+            color: #333;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+
+        .overview-section {
+            margin-bottom: 50px;
+            scroll-margin-top: 20px;
+        }
+
+        .overview-section h2 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .overview-section p {
+            font-size: 16px;
+            line-height: 1.9;
+            color: #555;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .review-cards {
+            display: grid;
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .review-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-left: 5px solid #f19500;
+            transition: all 0.3s ease;
+            scroll-margin-top: 20px; /* Jarak scroll agar tidak mepet atas */
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(241, 149, 0, 0.2);
+        }
+
+        .review-card h2 {
+            font-size: 22px;
+            color: #f19500;
+            margin-bottom: 20px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .review-card h2::before {
+            content: '📝';
+            font-size: 24px;
+        }
+
+        .review-card .assessment-label {
+            font-size: 14px;
+            color: #666;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .score-item {
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .score-label {
+            font-weight: bold;
+            color: #333;
+            display: block;
+        }
+
+        .score-value {
+            color: #f19500;
+            font-weight: bold;
+            float: right;
+        }
+
+        .score-desc {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .score-average {
+            background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 700;
+            text-align: center;
+            margin-top: 15px;
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+        }
+
+        .suggestions {
+            margin-top: 20px;
+            background: #fff9f0;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px dashed #f19500;
+        }
+
+        .final-score {
+            background: linear-gradient(135deg, #f19500 0%, #ff8800 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            margin-top: 50px;
+            box-shadow: 0 10px 30px rgba(241, 149, 0, 0.3);
+            scroll-margin-top: 20px;
+        }
+
+        .final-score h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .final-score .score {
+            font-size: 56px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        /* Peer Link Styling */
+        .peer-link-container {
+             margin-top: 30px;
+             text-align: center;
+        }
+        
+        .peer-link {
+            display: block;
+            background: white;
+            color: #f19500;
+            text-decoration: none;
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid #f19500;
+            font-weight: bold;
+            font-size: 18px;
+            transition: all 0.3s;
+            scroll-margin-top: 20px;
+        }
+        
+        .peer-link:hover {
+            background: #f19500;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(241, 149, 0, 0.3);
+        }
+
+        /* Responsiveness */
+        @media (max-width: 1200px) {
+            .right-sidebar {
+                display: none;
+            }
+            .main-content {
+                margin-right: 0;
+                padding-right: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                position: relative;
+                height: auto;
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 30px 20px;
+            }
+            .header h1 {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="profile">
+            <div class="profile-info">
+                <nama>Made Krisna Kusuma Wijaya</nama>
+                <p>18224091</p>
+            </div>
+        </div>
+
+        <nav>
+            <a href="index.html" class="menu-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                Selamat Datang
+            </a>
+
+            <a href="all-about-me.html" class="menu-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                UTS-1 All About Me
+            </a>
+
+            <a href="my-song-for-you.html" class="menu-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 18V5l12-2v13"></path>
+                    <circle cx="6" cy="18" r="3"></circle>
+                    <circle cx="18" cy="16" r="3"></circle>
+                </svg>
+                UTS-2 My Songs for You
+            </a>
+
+            <a href="my-story.html" class="menu-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                </svg>
+                UTS-3 My Stories for You
+            </a>
+
+            <a href="my-shape.html" class="menu-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+                UTS-4 My SHAPE
+            </a>
+
+            <a href="review.html" class="menu-item active">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+                UTS-5 My Personal Reviews
+            </a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="header" id="top">
+            <h1 style="font-family: Oxygen">My Personal Reviews</h1>
+        </header>
+
+        <div class="content-wrapper">
+            <h1 class="section-title">Laporan Pengukuran Berdasarkan Rubrik dari Tugas UTS</h1>
+            
+            <div class="identity-section" id="identitas">
+                <h2>Identifikasi</h2>
+                <p><strong>Nama Mahasiswa dan NIM Penyusun TUGAS:</strong> Made Krisna Kusuma Wijaya (18224091)</p>
+                <p><strong>Nama Penilai:</strong> Made Krisna Kusuma Wijaya (Self-Assessment)</p>
+            </div>
+
+            <div class="overview-section" id="tinjauan">
+                <h2>Tinjauan Umum</h2>
+                <p>Secara keseluruhan, kelima tugas UTS ini membentuk sebuah narasi pribadi yang sangat terstruktur dan saling terhubung. Masing-masing tugas berperan sebagai "bab" yang saling melengkapi, dimulai dengan pengenalan tema utama pada UTS-1, pengenalan sistem pendukung pada UTS-2, pengembangan alur cerita pada UTS-3, analisis karakter pada UTS-4, dan diakhiri dengan meta-review pada UTS-5.</p>
+                <p>Kekuatan utama dari keseluruhan tugas terletak pada konsistensi konektivitas cerita. Tema yang diangkat di UTS-1 (kehidupan sebagai film multi-genre dan penemuan Skhole) kembali dijalin dengan baik dalam UTS-3 dan UTS-4. Begitu pula, metafora "Constellations" dari UTS-2 menjadi dasar yang mendukung cerita di UTS-3. Hal ini menunjukkan orisinalitas dan perencanaan yang cermat untuk mencapai nilai tertinggi di setiap kriteria.</p>
+            </div>
+
+            <h2 class="section-title">Tinjauan Spesifik</h2>
+
+            <div class="review-cards">
+                <div class="review-card" id="uts1">
+                    <h2>UTS-1: All About Me</h2>
+                    <p class="assessment-label">Penilaian:</p>
+                    <div class="assessment-text">
+                        <p>Laman ini menyajikan narasi yang sangat personal dengan menggunakan gaya bahasa yang mudah dipahami dan mengalir dengan baik. Penulis mengungkapkan dirinya dengan cara yang terbuka dan jujur, menjelaskan asal-usulnya, hobi, dan harapan untuk masa depan. Penulis juga menunjukkan kesadaran diri yang tinggi, dengan menyampaikan tujuan akademik dan pengembangan pribadi dengan jelas. Penggunaan kalimat yang menginspirasi, seperti kutipan "Start where you are, use what you have, do what you can," menambah nilai lebih pada narasi ini, membuatnya lebih bermakna dan memotivasi.</p>
+                    </div>
+                    
+                    <div class="rubric-scores">
+                        <div class="score-item">
+                            <span class="score-label">1. Orisinalitas:</span>
+                            <span class="score-value">5 (Sangat Baik)</span>
+                            <p class="score-desc">Kreatif dan segar. Penggunaan metafora dan narasi yang berbeda memberikan sentuhan personal yang menarik.</p>
+                        </div>
+                        
+                        <div class="score-item">
+                            <span class="score-label">2. Keterlibatan:</span>
+                            <span class="score-value">5 (Sangat Baik)</span>
+                            <p class="score-desc">Tertarik dan mendalam. Pembaca bisa merasakan kedekatan penulis dengan cerita yang disampaikan.</p>
+                        </div>
+                        
+                        <div class="score-item">
+                            <span class="score-label">3. Humor:</span>
+                            <span class="score-value">4 (Baik)</span>
+                            <p class="score-desc">Tidak ada humor eksplisit, namun gaya penulisan yang ringan dan optimis memberikan kesan positif.</p>
+                        </div>
+                        
+                        <div class="score-item">
+                            <span class="score-label">4. Wawasan (Insight):</span>
+                            <span class="score-value">5 (Sangat Baik)</span>
+                            <p class="score-desc">Mendalam dan reflektif. Penulis memberikan wawasan yang kuat mengenai diri sendiri dan tujuan masa depan.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="score-average">Skor Rata-rata: 4.75 / 5.0</div>
+                    
+                    <div class="suggestions">
+                        <h3>Saran Perbaikan:</h3>
+                        <ul>
+                            <li>Menambahkan sedikit humor atau elemen ringan lainnya bisa memperkaya teks dan memberikan variasi dalam ekspresi.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="review-card" id="uts2">
+                    <h2>UTS-2: Song for You</h2>
+                    <p class="assessment-label">Penilaian:</p>
+                    <div class="assessment-text">
+                        <p>Laman ini menyajikan lagu dengan lirik yang penuh semangat dan optimisme. Tema yang diangkat sangat positif, dengan pesan untuk tetap kuat menghadapi tantangan hidup dan percaya bahwa semuanya akan kembali baik. Lirik yang mudah dipahami dan diikuti, bersama dengan pengulangan refrains yang efektif, memperkuat pesan kebahagiaan dan harapan. Nada keseluruhan terasa menyemangati dan memberi dukungan kepada pendengar, memberikan rasa kehangatan dan semangat untuk melanjutkan perjalanan.</p>
+                    </div>
+                    
+                    <div class="rubric-scores">
+                        <div class="score-item">
+                            <span class="score-label">1. Orisinalitas:</span>
+                            <span class="score-value">4 (Baik)</span>
+                            <p class="score-desc">Lirik lagu ini cukup orisinal dengan tema yang universal, yaitu kebahagiaan dan semangat positif. Meskipun tema ini umum, cara penyampaiannya tetap menarik.</p>
+                        </div>
+                        
+                        <div class="score-item">
+                            <span class="score-label">2. Keterlibatan:</span>
+                            <span class="score-value">5 (Sangat Baik)</span>
+                            <p class="score-desc">Tertarik dan menyentuh. Lirik yang disampaikan sangat mengundang keterlibatan emosional dengan pendengar, membuat mereka merasa terhubung dengan pesan yang ada.</p>
+                        </div>
+                        
+                        <div class="score-item">
+                            <span class="score-label">3. Humor:</span>
+                            <span class="score-value">3 (Cukup)</span>
+                            <p class="score-desc">Tidak ada humor eksplisit dalam lagu ini, namun lirik yang ringan dan optimis memberikan efek positif yang cukup menyenangkan.</p>
+                        </div>
+                        
+                        <div class="score-item">
+                            <span class="score-label">4. Wawasan (Insight):</span>
+                            <span class="score-value">4 (Baik)</span>
+                            <p class="score-desc">Pesan yang disampaikan memberikan wawasan tentang pentingnya optimisme dan semangat hidup. Walaupun sederhana, pesan tersebut jelas dan bisa memberikan inspirasi.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="score-average">Skor Rata-rata: 4.0 / 5.0</div>
+                    
+                    <div class="suggestions">
+                        <h3>Saran Perbaikan:</h3>
+                        <ul>
+                            <li>Meskipun liriknya sudah cukup menyentuh, menambahkan lebih banyak variasi dalam tema atau metafora bisa meningkatkan orisinalitas lagu ini lebih lanjut.</li>
+                            <li>Menggunakan sedikit elemen humor bisa membuat lagu terasa lebih berwarna dan mengurangi kesan terlalu serius.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="review-card" id="uts3">
+                    <h2>UTS-3: My Story for You</h2>
+                    <p class="assessment-label">Penilaian:</p>
+                    <div class="assessment-text">
+                        <p>Laman ini menyajikan cerita pribadi yang sangat mendalam dan penuh dengan refleksi. Penulis berhasil menggambarkan perjalanan hidupnya dari ketertarikan awal terhadap dunia komputer, kebimbangan memilih jurusan, hingga akhirnya menemukan kembali passion di dunia teknologi. Gaya penulisan yang jujur dan terbuka membuat pembaca merasa terhubung dengan cerita yang disampaikan. Kisah ini juga menginspirasi, menunjukkan bahwa meskipun ada rintangan dan perubahan arah, kita tetap bisa menemukan jalur yang sesuai dengan minat dan tujuan hidup kita. Penulis mampu menyampaikan prosesnya dengan penuh ketulusan dan tekad untuk terus belajar dan berkembang.</p>
+                    </div>
+                    
+                    <div class="rubric-scores">
+                        <div class="score-item">
+                            <span class="score-label">1. Orisinalitas:</span>
+                            <span class="score-value">5 (Sangat Baik)</span>
+                            <p class="score-desc">Cerita pribadi yang jujur dan orisinal. Penyampaian kisah yang sangat unik dan autentik.</p>
+                        </div>
+                        
+                        <div class="score-item">
+                            <span class="score-label">2. Keterlibatan:</span>
+                            <span class="score-value">5 (Sangat Baik)</span>
+                            <p class="score-desc">Tertarik dan menyentuh. Penulis berhasil menggugah perasaan pembaca dengan cerita yang sangat relate dan penuh emosi.</p>
+                        </div>
+                        
+                        <div class="score-item">
+                            <span class="score-label">3. Humor:</span>
+                            <span class="score-value">3 (Cukup)</span>
+                            <p class="score-desc">Tidak ada humor eksplisit, namun penyampaian yang ringan dan penuh optimisme memberikan kesan positif.</p>
+                        </div>
+                        
+                        <div class="score-item">
+                            <span class="score-label">4. Wawasan (Insight):</span>
+                            <span class="score-value">5 (Sangat Baik)</span>
+                            <p class="score-desc">Mendalam dan reflektif. Menyampaikan pemahaman yang kuat mengenai pentingnya mengikuti passion dan menjalani hidup dengan niat yang baik.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="score-average">Skor Rata-rata: 4.5 / 5.0</div>
+                    
+                    <div class="suggestions">
+                        <h3>Saran Perbaikan:</h3>
+                        <ul>
+                            <li>Meskipun cerita sudah sangat personal dan menyentuh, menambahkan lebih banyak elemen ringan atau humor bisa memberikan variasi dalam ekspresi emosi.</li>
+                            <li>Mungkin bisa memperdalam beberapa bagian cerita, misalnya lebih banyak menjelaskan pengalaman pribadi atau tantangan yang dihadapi dalam menjalani proses tersebut.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="conclusion-note">
+                        <p>Secara keseluruhan, tulisan ini sangat inspiratif dan menggugah. Penulis mampu menulis dengan cara yang sangat relatable dan menunjukkan perjalanan hidup yang penuh refleksi dan perjuangan.</p>
+                    </div>
+                </div>
+
+                <div class="review-card" id="uts4">
+                    <h2>UTS-4: My SHAPE</h2>
+                    <p class="assessment-label">Penilaian:</p>
+                    <div class="assessment-text">
+                        <p>Laman ini menyajikan gambaran yang sangat jelas dan terstruktur mengenai personal charter penulis. Setiap dimensi yang diuraikan memberikan wawasan tentang kekuatan pribadi, nilai-nilai yang dijunjung, keterampilan yang dimiliki, dan pengalaman yang diperoleh penulis. Penulis berhasil merinci atribut-atribut penting seperti kreativitas, kepemimpinan, empati, dan kemampuan untuk bekerja dalam tim, yang memberi kesan bahwa dia memiliki pemahaman diri yang matang dan siap untuk tumbuh. Pernyataan misi pribadi yang jelas menunjukkan komitmen untuk terus berkembang dan memberikan dampak positif bagi orang lain.</p>
+                    </div>
+                    
+                    <div class="rubric-scores">
+                        <div class="score-item">
+                            <span class="score-label">1. Orisinalitas:</span>
+                            <span class="score-value">5 (Sangat Baik)</span>
+                            <p class="score-desc">Terstruktur dan unik. Penyajian piagam diri sangat sistematis dan orisinal dalam menggambarkan dimensi kehidupan pribadi.</p>
+                        </div>
+                        
+                        <div class="score-item">
+                            <span class="score-label">2. Keterlibatan:</span>
+                            <span class="score-value">5 (Sangat Baik)</span>
+                            <p class="score-desc">Personal dan reflektif. Pembaca bisa merasakan keterhubungan antara penulis dengan nilai-nilai yang dijunjung dan tujuannya untuk berkembang.</p>
+                        </div>
+                        
+                        <div class="score-item">
+                            <span class="score-label">3. Humor:</span>
+                            <span class="score-value">3 (Cukup)</span>
+                            <p class="score-desc">Tidak ada humor eksplisit, namun penyampaian yang lugas dan jelas memberikan kesan yang positif.</p>
+                        </div>
+                        
+                        <div class="score-item">
+                            <span class="score-label">4. Wawasan (Insight):</span>
+                            <span class="score-value">5 (Sangat Baik)</span>
+                            <p class="score-desc">Mendalam dan bernilai. Penulis memberikan wawasan tentang pentingnya pengembangan diri yang selaras dengan nilai-nilai integritas, empati, dan kontribusi sosial.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="score-average">Skor Rata-rata: 4.5 / 5.0</div>
+                    
+                    <div class="suggestions">
+                        <h3>Saran Perbaikan:</h3>
+                        <ul>
+                            <li>Penambahan elemen ringan atau humor dapat memberikan keseimbangan emosional dan membuat teks lebih hidup.</li>
+                            <li>Mungkin bisa memperdalam penjelasan mengenai pengalaman hidup yang lebih konkret, agar lebih menggambarkan perjalanan nyata yang telah dilalui.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="final-score" id="skor">
+                <h2>Skor Keseluruhan</h2>
+                <div class="score">4.5 / 5.0</div>
+                <p>Excellent Performance</p>
+            </div>
+            
+            <div class="peer-link-container" id="peer">
+                <a href="https://docs.google.com/spreadsheets/d/1O0qYCvwmU_srJZN0sQiDKkEXBqUCjPbr/edit?usp=sharing" class="peer-link" target="_blank">
+                    📝 Isi Form Peer to Peer Assessment
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <aside class="right-sidebar">
+        <h3>Daftar Isi</h3>
+        <a href="#top" class="toc-item">Judul Halaman</a>
+        <a href="#identitas" class="toc-item">Identifikasi</a>
+        <a href="#tinjauan" class="toc-item">Tinjauan Umum</a>
+        <a href="#uts1" class="toc-item">Review UTS-1</a>
+        <a href="#uts2" class="toc-item">Review UTS-2</a>
+        <a href="#uts3" class="toc-item">Review UTS-3</a>
+        <a href="#uts4" class="toc-item">Review UTS-4</a>
+        <a href="#skor" class="toc-item">Skor Akhir</a>
+        <a href="#peer" class="toc-item">Peer Assessment</a>
+    </aside>
+
+</body>
+</html>

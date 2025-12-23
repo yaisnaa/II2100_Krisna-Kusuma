@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Asesmen II-2100 KIPP - My Assessment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* --- SIDEBAR KIRI (Menu Utama) --- */
+        .sidebar {
+            width: 300px;
+            background-color: #ffffff;
+            padding: 30px 20px;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: 4px 0 20px rgba(0,0,0,0.05);
+            z-index: 10;
+        }
+
+        /* --- SIDEBAR KANAN (Daftar Isi) --- */
+        .right-sidebar {
+            width: 250px;
+            background-color: rgba(255, 255, 255, 0.5);
+            padding: 30px 20px;
+            position: fixed;
+            right: 0;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            border-left: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+            z-index: 10;
+            transform: translateX(10px);
+        }
+
+        .right-sidebar:hover {
+            background-color: #ffffff;
+            box-shadow: -4px 0 20px rgba(0,0,0,0.1);
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .right-sidebar h3 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #feac28;
+        }
+
+        .toc-item {
+            display: block;
+            padding: 8px 15px;
+            margin-bottom: 8px;
+            color: #666;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .toc-item:hover {
+            background-color: rgba(254, 172, 40, 0.1);
+            color: #d38b00;
+            border-left: 3px solid #feac28;
+            transform: translateX(-5px);
+        }
+
+        /* --- Profil --- */
+        .profile {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            gap: 15px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .profile-info nama {
+            font-size: 18px;
+            color: rgb(241, 149, 0);
+            font-weight: 600;
+            display: block;
+        }
+
+        .profile-info p {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        /* --- Menu Items --- */
+        .menu-item {
+            padding: 12px 20px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #555;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(135deg, #feac28 0%, #ff8800 100%);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .menu-item:hover {
+            background-color: rgba(254, 172, 40, 0.1);
+            color: #d38b00;
+            transform: translateX(5px);
+        }
+
+        .menu-item:hover::before {
+            transform: scaleY(1);
+        }
+
+        .menu-item.active {
+            background: linear-gradient(135deg, #feac28 0%, #ff8800 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(254, 172, 40, 0.3);
+        }
+
+        .menu-item svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* --- MAIN CONTENT --- */
+        .main-content {
+            margin-left: 300px;
+            margin-right: 250px;
+            flex: 1;
+            padding: 50px 60px;
+            max-width: 1200px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            font-size: 50px;
+            background: linear-gradient(135deg, #feac28 0%, #ffa719 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            font-weight: 800;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Assessment Card Styling --- */
+        .assessment-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            border-left: 5px solid #feac28;
+            transition: transform 0.3s ease;
+            scroll-margin-top: 20px;
+        }
+
+        .assessment-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+
+        .card-title {
+            font-size: 24px;
+            color: #333;
+            font-weight: 700;
+        }
+
+        .card-subtitle {
+            font-size: 16px;
+            color: #feac28;
+            font-weight: 600;
+        }
+
+        /* --- Table Styling --- */
+        .table-container {
+            overflow-x: auto; /* Agar responsif di HP */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background: linear-gradient(135deg, #feac28 0%, #ff8800 100%);
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+
+        th:first-child { border-top-left-radius: 8px; }
+        th:last-child { border-top-right-radius: 8px; }
+
+        tr:last-child td { border-bottom: none; }
+
+        tr:hover {
+            background-color: #fff9f0;
+        }
+
+        .score-cell {
+            text-align: center;
+            font-weight: bold;
+            color: #d38b00;
+            font-size: 18px;
+            background-color: rgba(254, 172, 40, 0.1);
+            width: 10%;
+        }
+
+        .criteria-cell {
+            font-weight: 600;
+            color: #333;
+            width: 20%;
+        }
+
+        .justification-cell {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Final Score Box */
+        .final-score-box {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            text-align: center;
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 50px;
+            box-shadow: 0 10px 30px rgba(44, 62, 80, 0.3);
+        }
+
+        .final-score-box h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .final-score-box .big-score {
+            font-size: 60px;
+            font-weight: 900;
+            color: #feac28;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        /* Responsiveness */
+        @media (max-width: 1200px) {
+            .right-sidebar { display: none; }
+            .main-content { margin-right: 0; padding-right: 40px; }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar { width: 100%; position: relative; height: auto; padding: 20px; border-bottom: 1px solid #eee; }
+            .main-content { margin-left: 0; padding: 30px 20px; }
+            .header h1 { font-size: 36px; }
+            .assessment-card { padding: 20px; }
+            .card-title { font-size: 20px; }
+            th, td { padding: 10px; font-size: 14px; }
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="profile">
+            <div class="profile-info">
+                <nama>Made Krisna Kusuma Wijaya</nama>
+                <p>18224091</p>
+            </div>
+        </div>
+
+        <nav>
+            <a href="index.html" class="menu-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                Selamat Datang
+            </a>
+            
+            <a href="all-about-me.html" class="menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>UTS-1 All About Me</a>
+            <a href="my-song-for-you.html" class="menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>UTS-2 My Songs for You</a>
+            <a href="my-story.html" class="menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>UTS-3 My Stories for You</a>
+            <a href="my-shape.html" class="menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>UTS-4 My SHAPE</a>
+            <a href="review.html" class="menu-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>UTS-5 My Personal Reviews</a>
+            
+            <a href="myConcepts.html" class="menu-item">
+                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16.1A5 5 0 0 1 5.9 20M2 12.05A9 9 0 0 1 9.95 20M2 8A13 13 0 0 1 13.95 20M2 4A17 17 0 0 1 17.95 20M2 20h.01"></path></svg>
+                UAS-1 My Concepts
+            </a>
+            <a href="myOpinions.html" class="menu-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+               UAS-2 My Opinions
+           </a>
+           <a href="myInovations.html" class="menu-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                UAS-3 My Inovations
+            </a>
+            <a href="myKnowledge.html" class="menu-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                UAS-4 My Knowledge
+            </a>
+            
+            <a href="myProfesional.html" class="menu-item active">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                UAS-5 My Profesional
+            </a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="header" id="top">
+            <h1 style="font-family: Oxygen">My Assessment</h1>
+        </header>
+
+        <div class="assessment-card" id="uas1">
+            <div class="card-header">
+                <div>
+                    <div class="card-title">Penilaian UAS-1: My Concepts</div>
+                    <div class="card-subtitle">Judul: Mahakarya Restorasi Ekologis</div>
+                </div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Criteria</th>
+                            <th>Score</th>
+                            <th>Justification (Alasan Penilaian)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="criteria-cell">Clarity</td>
+                            <td class="score-cell">5</td>
+                            <td class="justification-cell">Konsep TISE (Hati, Pikiran, Tenaga) dijelaskan dengan sangat jernih dalam konteks lingkungan. Transisi dari istilah abstrak (Homocordium) ke istilah konkret (Ecological Axiological Intelligence) tidak ambigu dan mudah dipahami.</td>
+                        </tr>
+                        <tr>
+                            <td class="criteria-cell">Logic</td>
+                            <td class="score-cell">5</td>
+                            <td class="justification-cell">Struktur logika sangat koheren; dimulai dari identifikasi masalah (krisis koordinasi manusia-alam) menuju solusi sistemik (penyelarasan 3 kecerdasan). Hubungan sebab-akibat antara "Hati yang selaras" dan "Pikiran yang presisi" terbangun dengan baik.</td>
+                        </tr>
+                        <tr>
+                            <td class="criteria-cell">Validity</td>
+                            <td class="score-cell">5</td>
+                            <td class="justification-cell">Konsep didukung kuat oleh data empiris (WHO, Jurnal Science) dan kerangka kerja global (SDGs). Penggunaan data 99% populasi terpapar polusi memberikan validitas tinggi pada argumen urgensi "Mahakarya Rekayasa".</td>
+                        </tr>
+                        <tr>
+                            <td class="criteria-cell">Usefulness</td>
+                            <td class="score-cell">5</td>
+                            <td class="justification-cell">Konsep ini sangat bermanfaat sebagai landasan filosofis tingkat tinggi untuk merancang kebijakan lingkungan atau strategi perusahaan (sustainability strategy).</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="assessment-card" id="uas2">
+            <div class="card-header">
+                <div>
+                    <div class="card-title">Penilaian UAS-2: My Opinions</div>
+                    <div class="card-subtitle">Judul: Green VALORAIZE Learning</div>
+                </div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Criteria</th>
+                            <th>Score</th>
+                            <th>Justification (Alasan Penilaian)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="criteria-cell">Clarity</td>
+                            <td class="score-cell">5</td>
+                            <td class="justification-cell">Opini tentang perubahan paradigma pendidikan disajikan tanpa ambiguitas. Istilah baru seperti Impact Marketplace dan Eco-Credits didefinisikan dengan jelas operasionalnya.</td>
+                        </tr>
+                        <tr>
+                            <td class="criteria-cell">Logic</td>
+                            <td class="score-cell">5</td>
+                            <td class="justification-cell">Argumen dibangun secara logis: AI membuat hafalan usang -> Krisis lingkungan butuh solusi nyata -> Maka, ruang kelas harus jadi simulasi kerja (Teater Kerja). Alur pikir ini runtut dan masuk akal.</td>
+                        </tr>
+                        <tr>
+                            <td class="criteria-cell">Validity</td>
+                            <td class="score-cell">5</td>
+                            <td class="justification-cell">Sangat valid dalam merespons tantangan ganda saat ini: keberadaan Generative AI di dunia pendidikan dan krisis iklim. Solusi yang ditawarkan relevan dengan kebutuhan industri masa depan.</td>
+                        </tr>
+                        <tr>
+                            <td class="criteria-cell">Usefulness</td>
+                            <td class="score-cell">5</td>
+                            <td class="justification-cell">Sangat aplikatif. Ide "Portofolio Integritas Ekologis" dan metode penilaian berbasis "Mata Uang Dampak" dapat langsung diadopsi oleh institusi pendidikan teknik.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="assessment-card" id="uas3">
+            <div class="card-header">
+                <div>
+                    <div class="card-title">Penilaian UAS-3: My Innovations</div>
+                    <div class="card-subtitle">Judul: TISE 2.0 & Teater Pemulihan</div>
+                </div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Criteria</th>
+                            <th>Score</th>
+                            <th>Justification (Alasan Penilaian)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="criteria-cell">Clarity</td>
+                            <td class="score-cell">5</td>
+                            <td class="justification-cell">Meskipun memuat terminologi teknis yang padat (PUDAL, CORE Engine, Entropi), penggunaan analogi "Stasiun", "Kendaraan", dan "Rute Jalan" membuat arsitektur sistem yang kompleks menjadi sangat mudah dibayangkan (visualizable).</td>
+                        </tr>
+                        <tr>
+                            <td class="criteria-cell">Logic</td>
+                            <td class="score-cell">5</td>
+                            <td class="justification-cell">Sistem dirancang dengan logika rekayasa sistem yang kuat (Systems Engineering). Siklus umpan balik (Input -> PUDAL -> Output -> Evaluasi) menunjukkan koherensi struktur yang tinggi.</td>
+                        </tr>
+                        <tr>
+                            <td class="criteria-cell">Validity</td>
+                            <td class="score-cell">5</td>
+                            <td class="justification-cell">Inovasi ini didasarkan pada prinsip termodinamika (entropi vs negentropi) dan siklus manajemen masalah standar industri, menjadikannya model teoretis yang valid.</td>
+                        </tr>
+                        <tr>
+                            <td class="criteria-cell">Usefulness</td>
+                            <td class="score-cell">5</td>
+                            <td class="justification-cell">Arsitektur Pollution Solving Agent (PSA) memberikan blueprint yang bermanfaat bagi pengembang perangkat lunak atau system architect yang ingin membangun solusi Smart City atau manajemen limbah.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="assessment-card" id="uas4">
+            <div class="card-header">
+                <div>
+                    <div class="card-title">Penilaian UAS-4: My Knowledge</div>
+                    <div class="card-subtitle">Judul: Eco-VALORISE & Penyelesaian Paradoks</div>
+                </div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Criteria</th>
+                            <th>Score</th>
+                            <th>Justification (Alasan Penilaian)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="criteria-cell">Clarity</td>
+                            <td class="score-cell">5</td>
+                            <td class="justification-cell">Penjelasan mengenai "Paradoks Pendidikan Rekayasa Lingkungan" sangat tajam dan mudah dimengerti. Perbedaan antara Knowledge (F & T) dan Application (S & A) dipisahkan dengan tegas.</td>
+                        </tr>
+                        <tr>
+                            <td class="criteria-cell">Logic</td>
+                            <td class="score-cell">5</td>
+                            <td class="justification-cell">Solusi "Anti-Answer Constraint" adalah respons logis untuk mencegah ketergantungan pada AI. Penggunaan W-Model dan PICOC Berlapis memberikan struktur pembuktian yang rasional.</td>
+                        </tr>
+                        <tr>
+                            <td class="criteria-cell">Validity</td>
+                            <td class="score-cell">5</td>
+                            <td class="justification-cell">Validitas pedagogis tinggi karena menggunakan pendekatan konstruktivisme (membangun pengetahuan sendiri) dan scaffolding. Sesuai dengan prinsip etika AI modern.</td>
+                        </tr>
+                        <tr>
+                            <td class="criteria-cell">Usefulness</td>
+                            <td class="score-cell">5</td>
+                            <td class="justification-cell">Sangat bermanfaat bagi pendidik. Contoh prompt reflektif yang diberikan ("Warisan apa yang ingin Anda tinggalkan?") adalah alat praktis yang bisa langsung digunakan di kelas.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="final-score-box">
+            <h2>Nilai Rata-Rata Keseluruhan</h2>
+            <div class="big-score">5.0 / 5.0</div>
+            <p>Perfect Performance</p>
+        </div>
+
+    </main>
+
+    <aside class="right-sidebar">
+        <h3>Daftar Isi</h3>
+        <a href="#top" class="toc-item">Judul Halaman</a>
+        <a href="#uas1" class="toc-item">Penilaian UAS-1</a>
+        <a href="#uas2" class="toc-item">Penilaian UAS-2</a>
+        <a href="#uas3" class="toc-item">Penilaian UAS-3</a>
+        <a href="#uas4" class="toc-item">Penilaian UAS-4</a>
+    </aside>
+
+</body>
+</html>
